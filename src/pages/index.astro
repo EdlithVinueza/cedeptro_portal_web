@@ -1,0 +1,319 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const partnerLogosRow1 = [
+  '01-2-300x77.png',
+  '02-2-300x101.png',
+  '03-1-300x90.png',
+  '04-1-300x106.png'
+];
+
+const partnerLogosRow2 = [
+  '05-300x55.png',
+  '06.png',
+  '07.png',
+  '08-300x128.png',
+  '09.png',
+  '10-300x97.png'
+];
+
+const partnerLogosRow3 = [
+  '11-300x122.png',
+  '12-300x108.png',
+  '13-300x86.png',
+  '14-300x62.png',
+  '15-300x151.png',
+  '16-300x74.png'
+];
+---
+
+<Layout 
+  title="Cedepro Ecuador – Cedepro"
+  description="Aliados estratégicos, impulsando la calidad y el desarrollo sostenible en la educación"
+>
+  
+  <!-- 1. HERO HEADER SECTION -->
+  <section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-32 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-8-2048x819.png');">
+    <div class="absolute inset-0 bg-[#091E3A]/75 pointer-events-none"></div>
+    
+    <div class="relative max-w-4xl mx-auto space-y-3 sm:space-y-4 z-10">
+      <p class="text-white text-xl sm:text-2xl md:text-3xl font-cursive">
+        Aliados estratégicos,
+      </p>
+      <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-snug md:leading-tight font-heading">
+        Impulsando la calidad y el desarrollo sostenible en la educación
+      </h1>
+    </div>
+  </section>
+
+  <!-- 2. TRES COLUMNAS FOTOGRÁFICAS ORIGINALES (DISEÑO, ACREDITACIÓN, CONSULTORÍA) -->
+  <section class="w-full bg-[#091E3A]">
+    <div class="grid grid-cols-1 md:grid-cols-3">
+      
+      <!-- Banner 1: Diseño de Carreras (descarga-21.png) -->
+      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300" style="background-image: url('/assets/descarga-21.png');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
+          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Diseño de Carreras</h3>
+          <p class="text-xs sm:text-sm text-slate-200 font-cursive italic mt-1">Planes académicos estratégicos</p>
+        </div>
+      </a>
+
+      <!-- Banner 2: Procesos de acreditación (acreditacion-1.png) -->
+      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 md:border-l md:border-r border-white/10" style="background-image: url('/assets/acreditacion-1.png');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
+          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Procesos de acreditación</h3>
+          <p class="text-xs sm:text-sm text-slate-200 font-cursive italic mt-1">Cumplimiento y excelencia</p>
+        </div>
+      </a>
+
+      <!-- Banner 3: Consultoría en gestión (descarga-42.png) -->
+      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 border-white/10" style="background-image: url('/assets/descarga-42.png');">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
+          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Consultoría en gestión</h3>
+          <p class="text-xs sm:text-sm text-slate-200 font-cursive italic mt-1">Administrativa y normativa</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- 3. SOMOS EXCELENCIA (PARALLAX CON descarga-32.png Y FONDO TRASLÚCIDO) -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-32.png');">
+    <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-10">
+      
+      <!-- Izquierda -->
+      <div class="lg:col-span-5 space-y-3 sm:space-y-4 text-center lg:text-left">
+        <p class="text-base sm:text-lg text-[#b8860b] font-cursive">En educación superior</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading leading-tight">Somos excelencia</h2>
+        <div class="pt-2 sm:pt-4">
+          <a href="/sobre-nosotros" class="btn-navy w-full sm:w-auto">
+            Quiénes somos
+          </a>
+        </div>
+      </div>
+
+      <!-- Derecha -->
+      <div class="lg:col-span-7 space-y-4 sm:space-y-6 text-[#4a4a4a] leading-relaxed text-sm sm:text-base">
+        <p>
+          En CEDEPRO, transformamos el futuro de la educación superior. Somos el puente entre la innovación y la excelencia, diseñando soluciones estratégicas que elevan instituciones y potencian profesionales. Desde acreditación y gestión hasta formación continua y desarrollo institucional, impulsamos calidad, inclusión y sostenibilidad. No seguimos tendencias, <strong class="text-[#091E3A]">LAS CREAMOS</strong>.
+        </p>
+        <div class="pt-2 flex justify-start">
+          <span class="font-signature text-3xl sm:text-4xl md:text-5xl text-[#333333] block">J. Pablo Morales</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. ÚNETE AL CAMBIO EN EXCELENCIA EDUCATIVA (FONDO MOSTAZA / OCRE #b8860b) -->
+  <section class="bg-[#b8860b] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      
+      <!-- Izquierda -->
+      <div class="lg:col-span-5 space-y-2 text-center lg:text-left">
+        <p class="text-lg sm:text-xl font-cursive text-amber-100">Únete al cambio</p>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold font-heading uppercase leading-tight">en excelencia educativa</h2>
+      </div>
+
+      <!-- Derecha -->
+      <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left">
+        <p class="text-white/95 text-sm sm:text-base md:text-lg leading-relaxed">
+          En CEDEPROEC, transformamos la educación con soluciones estratégicas, adaptadas a las necesidades de cada institución.<br class="hidden sm:inline" />
+          Descubre cómo podemos llevar tu institución al siguiente nivel.
+        </p>
+        <div>
+          <a href="/contacto" class="btn-white w-full sm:w-auto">
+            Solicita asesoría
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. MISIÓN Y VISIÓN (PARALLAX CON descarga-7.jpeg) -->
+  <section class="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-7.jpeg');">
+    <div class="absolute inset-0 bg-black/50 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-8 sm:space-y-12 lg:space-y-16 z-10">
+      
+      <!-- Fila 1: Tarjeta Misión a la Derecha -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="hidden lg:block lg:col-span-6"></div>
+        <div class="lg:col-span-6 bg-white p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-3 sm:space-y-4">
+          <p class="text-sm sm:text-base text-[#666666] font-cursive">Tenemos una</p>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1a1a] font-heading">Misión</h3>
+          <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed italic">
+            «Ser un aliado estratégico de las Instituciones de Educación generando propuestas de calidad que respondan a las necesidades específicas de cada institución y su entorno, promoviendo la excelencia académica y el desarrollo sostenible.»
+          </p>
+        </div>
+      </div>
+
+      <!-- Fila 2: Tarjeta Visión a la Izquierda -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-6 bg-white p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-3 sm:space-y-4">
+          <p class="text-sm sm:text-base text-[#666666] font-cursive">Caminamos con</p>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1a1a] font-heading">Visión</h3>
+          <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed italic">
+            «Ser reconocidos como un referente del país en la implementación de innovaciones educativas de calidad para el 2030.»
+          </p>
+        </div>
+        <div class="hidden lg:block lg:col-span-6"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. TESTIMONIOS Y ESTADÍSTICAS (PARALLAX CON descarga-6.jpeg) -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-6.jpeg');">
+    <div class="absolute inset-0 bg-[#091E3A]/85 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center z-10">
+      
+      <!-- Testimonio (Izquierda) -->
+      <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center sm:text-left">
+        <div>
+          <p class="text-base sm:text-lg text-[#f5a623] font-cursive">De nuestros clientes...</p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">Testimonios</h2>
+        </div>
+        
+        <p class="text-slate-200 text-sm sm:text-base leading-relaxed italic">
+          "Trabajar de la mano de profesionales como CEDEPRO ha multiplicado los resultados esperados en nuestra institución y ha acortado el camino hacia nuestros objetivos más ambiciosos."
+        </p>
+
+        <div class="flex items-center justify-center sm:justify-start gap-4 pt-2">
+          <img 
+            src="/assets/imagen_2025-05-06_151114552-150x150.png" 
+            alt="Ramón Pineda" 
+            class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white/30 shrink-0"
+            loading="lazy"
+          />
+          <div class="text-left">
+            <div class="font-bold text-white text-sm sm:text-base font-heading">Ramón Pineda</div>
+            <div class="text-xs text-slate-300">Rector CGE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estadísticas (Derecha) -->
+      <div class="lg:col-span-6 grid grid-cols-2 gap-6 sm:gap-8 text-center sm:text-left bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-sm">
+        
+        <!-- Stat 1 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#f5a623] font-heading">+70</p>
+          <p class="text-[11px] sm:text-xs tracking-wider uppercase text-slate-200 font-medium">Carreras aprobadas</p>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#f5a623] font-heading">+10</p>
+          <p class="text-[11px] sm:text-xs tracking-wider uppercase text-slate-200 font-medium">Inst. Tecnológicos creados</p>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#f5a623] font-heading">+2500</p>
+          <p class="text-[11px] sm:text-xs tracking-wider uppercase text-slate-200 font-medium">Profesionales capacitados</p>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#f5a623] font-heading">+30</p>
+          <p class="text-[11px] sm:text-xs tracking-wider uppercase text-slate-200 font-medium">Instituciones asesoradas</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. ALIADOS (PARALLAX CON need-technology-partner.jpg CON TARJETAS BLANCAS) -->
+  <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/need-technology-partner.jpg');">
+    <div class="absolute inset-0 bg-[#1e2229]/90 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-12 sm:space-y-16 z-10">
+      
+      <!-- Heading -->
+      <div class="space-y-2 text-center sm:text-left">
+        <p class="text-base sm:text-lg text-[#f5a623] font-cursive">Caminamos con</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">Aliados</h2>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">de la mano de grandes partners académicos y administrativos para asegurar la excelencia.</p>
+      </div>
+
+      <!-- 3 Featured Partner Large White Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+        
+        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
+          <img src="/assets/01-300x99.png" alt="Cavilar el siguiente paso" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" loading="lazy" />
+          <p class="text-xs text-[#666666] mt-4 font-medium">Consultores y asesores corporativos</p>
+        </div>
+
+        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
+          <img src="/assets/02.png" alt="Digital Mind Powered by Digital Rocket" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" loading="lazy" />
+          <p class="text-xs text-[#666666] mt-4 font-medium">Investigación y análisis de datos IA</p>
+        </div>
+
+        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 sm:col-span-2 md:col-span-1 border border-slate-100">
+          <img src="/assets/04-300x120.png" alt="Pro & Ciencialink Group-EC" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" loading="lazy" />
+          <p class="text-xs text-[#666666] mt-4 font-medium">Consultores en educación y tecnología</p>
+        </div>
+
+      </div>
+
+      <!-- Sección: Solicita una asesoría y da el siguiente paso -->
+      <div class="pt-6 sm:pt-12 text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
+        <p class="text-base sm:text-lg text-[#f5a623] font-cursive">Solicita una asesoría</p>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white font-heading">y da el siguiente paso</h2>
+        <div class="pt-2">
+          <a href="http://wa.me/593982867413" target="_blank" rel="noopener noreferrer" class="btn-outline-white w-full sm:w-auto">
+            Escríbenos
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. GENERAMOS CONFIANZA (PARALLAX CON Education.jpg Y TARJETAS BLANCAS DE LOGOS) -->
+  <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/Education.jpg');">
+    <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-8 sm:space-y-12 z-10">
+      
+      <div class="space-y-2 text-center sm:text-left">
+        <p class="text-sm sm:text-base text-[#777777] font-cursive">Generamos</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading">Confianza</h2>
+        <p class="text-xs sm:text-sm md:text-base text-[#4a4a4a]">en Universidades e Institutos con los cuales hemos logrado resultados extraordinarios.</p>
+      </div>
+
+      <!-- Grilla de Logos en Tarjetas Blancas con Sombra -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center">
+        {partnerLogosRow1.map((logo) => (
+          <div class="h-20 sm:h-24 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-3 sm:p-4 hover:shadow-md transition-all hover:scale-[1.02]">
+            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-12 sm:max-h-14 max-w-full object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center">
+        {partnerLogosRow2.map((logo) => (
+          <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
+            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-10 sm:max-h-12 max-w-full object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center">
+        {partnerLogosRow3.map((logo) => (
+          <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
+            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-10 sm:max-h-12 max-w-full object-contain" loading="lazy" />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

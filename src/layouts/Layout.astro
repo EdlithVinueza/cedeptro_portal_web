@@ -1,0 +1,257 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppBtn from '../components/WhatsAppBtn.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Cedepro Ecuador – Cedepro",
+  description = "Aliados estratégicos impulsando la calidad y el desarrollo sostenible en la educación",
+  image = "/assets/lg-cedeproiso_blanco.webp"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://cedeproec.com");
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || "https://cedeproec.com")} />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site || "https://cedeproec.com")} />
+
+    <!-- Datos Estructurados Schema.org para Google Rich Snippets -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "CEDEPRO Ecuador SAS",
+      "url": "https://cedeproec.com",
+      "logo": "https://cedeproec.com/assets/logo-cedepro-1024x259.webp",
+      "description": "Aliados estratégicos impulsando la calidad y el desarrollo sostenible en la educación superior.",
+      "telephone": "+593 99 900 8133",
+      "email": "info@cedeproec.com",
+      "sameAs": [
+        "https://www.facebook.com/cedeproec/",
+        "https://www.instagram.com/cedepro_ec/",
+        "https://www.linkedin.com/company/cedepro-consultores-educativos"
+      ]
+    })} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/cropped-favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/cropped-favicon-192x192.png" />
+    <link rel="apple-touch-icon" href="/assets/cropped-favicon-180x180.png" />
+
+    <!-- Google Fonts (Exact typography from Cedepro Ecuador) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Playfair+Display:ital,wght@1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white text-[#4a4a4a] font-sans antialiased selection:bg-[#091E3A] selection:text-white flex flex-col min-h-screen overflow-x-hidden text-balance">
+    <Header />
+    
+    <main class="flex-grow w-full">
+      <slot />
+    </main>
+
+    <WhatsAppBtn />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  .font-heading {
+    font-family: 'Kanit', 'Poppins', sans-serif;
+  }
+
+  .font-cursive {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+  }
+
+  .font-signature {
+    font-family: 'Herr Von Muellerhoff', cursive;
+  }
+
+  /* Optimize mobile parallax / bg-fixed support */
+  @media (hover: none) or (max-width: 768px) {
+    .bg-fixed {
+      background-attachment: scroll !important;
+      background-size: cover !important;
+      background-position: center center !important;
+    }
+  }
+
+  /* Button styles with responsive and touch feedback */
+  .btn-navy {
+    background-color: #091E3A;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    padding: 0.65rem 1.6rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn-navy:hover {
+    background-color: #0d2d59;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(9, 30, 58, 0.25);
+  }
+  .btn-navy:active {
+    transform: scale(0.97);
+  }
+
+  .btn-gold {
+    background-color: #f5a623;
+    color: #091E3A;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    padding: 0.65rem 1.6rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+  .btn-gold:hover {
+    background-color: #e59716;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.3);
+  }
+  .btn-gold:active {
+    transform: scale(0.97);
+  }
+
+  .btn-white {
+    background-color: #ffffff;
+    color: #b8860b;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    padding: 0.65rem 1.6rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+  .btn-white:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  .btn-white:active {
+    transform: scale(0.97);
+  }
+
+  /* Pill button with crisp white border and hover fill */
+  .btn-outline-white {
+    background-color: transparent;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 9999px;
+    padding: 0.65rem 1.85rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .btn-outline-white:hover {
+    background-color: #ffffff;
+    color: #091E3A;
+    border-color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.3);
+  }
+  .btn-outline-white:active {
+    transform: scale(0.97);
+  }
+
+  /* Card Standard Classes */
+  .card-dark {
+    background-color: #091E3A;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(9, 30, 58, 0.25), 0 8px 10px -6px rgba(9, 30, 58, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @media (min-width: 640px) {
+    .card-dark {
+      border-radius: 1.5rem;
+    }
+  }
+
+  .card-light {
+    background-color: #ffffff;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @media (min-width: 640px) {
+    .card-light {
+      border-radius: 1.5rem;
+    }
+  }
+  .card-light:hover {
+    box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+</style>

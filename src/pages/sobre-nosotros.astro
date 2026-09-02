@@ -1,0 +1,285 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pillars = [
+  {
+    title: "INNOVACIÓN",
+    subtitle: "y disrupción permanente.",
+    icon: `<path d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"/>`,
+    viewBox: "0 0 576 512"
+  },
+  {
+    title: "PENSAMOS",
+    subtitle: "en el bienestar integral de la persona.",
+    icon: `<path d="M176 80c-52.94 0-96 43.06-96 96 0 8.84 7.16 16 16 16s16-7.16 16-16c0-35.3 28.72-64 64-64 8.84 0 16-7.16 16-16s-7.16-16-16-16zM96.06 459.17c0 3.15.93 6.22 2.68 8.84l24.51 36.84c2.97 4.46 7.97 7.14 13.32 7.14h78.85c5.36 0 10.36-2.68 13.32-7.14l24.51-36.84c1.74-2.62 2.67-5.7 2.68-8.84l.05-43.18H96.02l.04 43.18zM176 0C73.72 0 0 82.97 0 176c0 44.37 16.45 84.85 43.56 115.78 16.64 18.99 42.74 58.8 52.42 92.16v.06h48v-.12c-.01-4.77-.72-9.51-2.15-14.07-5.59-17.81-22.82-64.77-62.17-109.67-20.54-23.43-31.52-53.15-31.61-84.14-.2-73.64 59.67-128 127.95-128 70.58 0 128 57.42 128 128 0 30.97-11.24 60.85-31.65 84.14-39.11 44.61-56.42 91.47-62.1 109.46a47.507 47.507 0 0 0-2.22 14.3v.1h48v-.05c9.68-33.37 35.78-73.18 52.42-92.16C335.55 260.85 352 220.37 352 176 352 78.8 273.2 0 176 0z"/>`,
+    viewBox: "0 0 352 512"
+  },
+  {
+    title: "ANTICIPAMOS",
+    subtitle: "las necesidades del mundo y las adaptamos localmente.",
+    icon: `<path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/>`,
+    viewBox: "0 0 576 512"
+  },
+  {
+    title: "COCREAMOS",
+    subtitle: "con tecnologías abiertas y plataformas inmersivas.",
+    icon: `<path d="M500 128c6.627 0 12-5.373 12-12V44c0-6.627-5.373-12-12-12h-72c-6.627 0-12 5.373-12 12v12H96V44c0-6.627-5.373-12-12-12H12C5.373 32 0 37.373 0 44v72c0 6.627 5.373 12 12 12h12v256H12c-6.627 0-12 5.373-12 12v72c0 6.627 5.373 12 12 12h72c6.627 0 12-5.373 12-12v-12h320v12c0 6.627 5.373 12 12 12h72c6.627 0 12-5.373 12-12v-72c0-6.627-5.373-12-12-12h-12V128h12zm-52-64h32v32h-32V64zM32 64h32v32H32V64zm32 384H32v-32h32v32zm416 0h-32v-32h32v32zm-40-64h-12c-6.627 0-12 5.373-12 12v12H96v-12c0-6.627-5.373-12-12-12H72V128h12c6.627 0 12-5.373 12-12v-12h320v12c0 6.627 5.373 12 12 12h12v256zm-36-192h-84v-52c0-6.628-5.373-12-12-12H108c-6.627 0-12 5.372-12 12v168c0 6.628 5.373 12 12 12h84v52c0 6.628 5.373 12 12 12h200c6.627 0 12-5.372 12-12V204c0-6.628-5.373-12-12-12zm-268-24h144v112H136V168zm240 176H232v-24h76c6.627 0 12-5.372 12-12v-76h56v112z"/>`,
+    viewBox: "0 0 512 512"
+  },
+  {
+    title: "TENEMOS",
+    subtitle: "compromiso real con el impacto social y educativo.",
+    icon: `<path d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"/>`,
+    viewBox: "0 0 576 512"
+  }
+];
+
+const experienceItems = [
+  {
+    title: "Calidad de trabajo",
+    description: "ISO 9001:2015 certificada para todos nuestros procesos.",
+    icon: `<path d="M458.622 255.92l45.985-45.005c13.708-12.977 7.316-36.039-10.664-40.339l-62.65-15.99 17.661-62.015c4.991-17.838-11.829-34.663-29.661-29.671l-61.994 17.667-15.984-62.671C337.085.197 313.765-6.276 300.99 7.228L256 53.57 211.011 7.229c-12.63-13.351-36.047-7.234-40.325 10.668l-15.984 62.671-61.995-17.667C74.87 57.907 58.056 74.738 63.046 92.572l17.661 62.015-62.65 15.99C.069 174.878-6.31 197.944 7.392 210.915l45.985 45.005-45.985 45.004c-13.708 12.977-7.316 36.039 10.664 40.339l62.65 15.99-17.661 62.015c-4.991 17.838 11.829 34.663 29.661 29.671l61.994-17.667 15.984 62.671c4.439 18.575 27.696 24.018 40.325 10.668L256 458.61l44.989 46.001c12.5 13.488 35.987 7.486 40.325-10.668l15.984-62.671 61.994 17.667c17.836 4.994 34.651-11.837 29.661-29.671l-17.661-62.015 62.65-15.99c17.987-4.302 24.366-27.367 10.664-40.339l-45.984-45.004z"/>`,
+    viewBox: "0 0 512 512"
+  },
+  {
+    title: "13 Unidades académicas y administrativas",
+    description: "Diseños de proyectos exitosos en creación de Unidades Académicas y Administrativas totalmente aprobadas.",
+    icon: `<path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/>`,
+    viewBox: "0 0 640 512"
+  },
+  {
+    title: "10 ISTT aprobados",
+    description: "Institutos Superiores Tecnológicos creados desde diagnóstico, gestión, aprobación y acompañamiento.",
+    icon: `<path d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7.1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z"/>`,
+    viewBox: "0 0 512 512"
+  },
+  {
+    title: "4 reconocimientos",
+    description: "recibidos por Institutos Superiores Universitarios.",
+    icon: `<path d="M223.75 130.75L154.62 15.54A31.997 31.997 0 0 0 127.18 0H16.03C3.08 0-4.5 14.57 2.92 25.18l111.27 158.96c29.72-27.77 67.52-46.83 109.56-53.39zM495.97 0H384.82c-11.24 0-21.66 5.9-27.44 15.54l-69.13 115.21c42.04 6.56 79.84 25.62 109.56 53.38L509.08 25.18C516.5 14.57 508.92 0 495.97 0zM256 160c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm92.52 157.26l-37.93 36.96 8.97 52.22c1.6 9.36-8.26 16.51-16.65 12.09L256 393.88l-46.9 24.65c-8.4 4.45-18.25-2.74-16.65-12.09l8.97-52.22-37.93-36.96c-6.82-6.64-3.05-18.23 6.35-19.59l52.43-7.64 23.43-47.52c2.11-4.28 6.19-6.39 10.28-6.39 4.11 0 8.22 2.14 10.33 6.39l23.43 47.52 52.43 7.64c9.4 1.36 13.17 12.95 6.35 19.59z"/>`,
+    viewBox: "0 0 512 512"
+  },
+  {
+    title: "+30 Institutos asesorados",
+    description: "en temas de gestión de calidad, gestión de procesos, normativa, administración, finanzas y recursos humanos.",
+    icon: `<path d="M488 192H336v56c0 39.7-32.3 72-72 72s-72-32.3-72-72V126.4l-64.9 39C107.8 176.9 96 197.8 96 220.2v47.3l-80 46.2C.7 322.5-4.6 342.1 4.3 357.4l80 138.6c8.8 15.3 28.4 20.5 43.7 11.7L231.4 448H368c35.3 0 64-28.7 64-64h16c17.7 0 32-14.3 32-32v-64h8c13.3 0 24-10.7 24-24v-48c0-13.3-10.7-24-24-24zm147.7-37.4L555.7 16C546.9.7 527.3-4.5 512 4.3L408.6 64H306.4c-12 0-23.7 3.4-33.9 9.7L239 94.6c-9.4 5.8-15 16.1-15 27.1V248c0 22.1 17.9 40 40 40s40-17.9 40-40v-88h184c30.9 0 56 25.1 56 56v28.5l80-46.2c15.3-8.9 20.5-28.4 11.7-43.7z"/>`,
+    viewBox: "0 0 640 512"
+  },
+  {
+    title: "+100 proyectos de carrera aprobados",
+    description: "Diseños de proyecto de carrera para tercer y cuarto nivel exitosamente aprobados.",
+    icon: `<path d="M272,240a16,16,0,1,0,16,16A16,16,0,0,0,272,240Zm-64-64a16,16,0,1,0,16,16A16,16,0,0,0,208,176Zm301.2,99c-20.93-47.12-48.43-151.73-73.07-186.75A207.9,207.9,0,0,0,266.09,0H192C86,0,0,86,0,192A191.23,191.23,0,0,0,64,334.81V512H320V448h64a64,64,0,0,0,64-64V320H480A32,32,0,0,0,509.2,275ZM368,240H355.88c-28.51,0-42.79,34.47-22.63,54.63l8.58,8.57a16,16,0,1,1-22.63,22.63l-8.57-8.58C290.47,297.09,256,311.37,256,339.88V352a16,16,0,0,1-32,0V339.88c0-28.51-34.47-42.79-54.63-22.63l-8.57,8.58a16,16,0,0,1-22.63-22.63l8.58-8.57c20.16-20.16,5.88-54.63-22.63-54.63H112a16,16,0,0,1,0-32h12.12c28.51,0,42.79-34.47,22.63-54.63l-8.58-8.57a16,16,0,0,1,22.63-22.63l8.57,8.58c20.16,20.16,54.63,5.88,54.63-22.63V96a16,16,0,0,1,32,0v12.12c0,28.51,34.47,42.79,54.63,22.63l8.57-8.58a16,16,0,0,1,22.63,22.63l-8.58,8.57C313.09,173.53,327.37,208,355.88,208H368a16,16,0,0,1,0,32Z"/>`,
+    viewBox: "0 0 512 512"
+  }
+];
+
+const flipCards = [
+  {
+    title: "Asesorías",
+    description: "Soluciones inteligentes con datos precisos, optimización de procesos y cumplimiento normativo sin complicaciones.",
+    link: "/portafolio",
+    icon: `<path d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"/>`,
+    viewBox: "0 0 640 512"
+  },
+  {
+    title: "Consultorías",
+    description: "Evaluamos a fondo cada aspecto para optimizar procesos académicos, administrativos y estratégicos con decisiones basadas en datos y visión estructurada.",
+    link: "/portafolio",
+    icon: `<path d="M347.94 129.86L203.6 195.83a31.938 31.938 0 0 0-15.77 15.77l-65.97 144.34c-7.61 16.65 9.54 33.81 26.2 26.2l144.34-65.97a31.938 31.938 0 0 0 15.77-15.77l65.97-144.34c7.61-16.66-9.54-33.81-26.2-26.2zm-77.36 148.72c-12.47 12.47-32.69 12.47-45.16 0-12.47-12.47-12.47-32.69 0-45.16 12.47-12.47 32.69-12.47 45.16 0 12.47 12.47 12.47 32.69 0 45.16zM248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 448c-110.28 0-200-89.72-200-200S137.72 56 248 56s200 89.72 200 200-89.72 200-200 200z"/>`,
+    viewBox: "0 0 496 512"
+  },
+  {
+    title: "Formación Continua",
+    description: "Aprendizaje flexible con simuladores, IA en contenidos y certificaciones que garantizan calidad educativa.",
+    link: "/portafolio",
+    icon: `<path d="M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z"/>`,
+    viewBox: "0 0 512 512"
+  },
+  {
+    title: "Proyectos",
+    description: "Impulsamos innovación educativa, fortalecemos la vinculación social y expandimos instituciones con estrategias que transforman el aprendizaje.",
+    link: "/portafolio",
+    icon: `<path d="M512 48v288c0 26.5-21.5 48-48 48h-48V176c0-44.1-35.9-80-80-80H128V48c0-26.5 21.5-48 48-48h288c26.5 0 48 21.5 48 48zM384 176v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h288c26.5 0 48 21.5 48 48zm-68 28c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v52h252v-52z"/>`,
+    viewBox: "0 0 512 512"
+  }
+];
+---
+
+<Layout 
+  title="Sobre nosotros – Cedepro Ecuador"
+  description="Queremos transformar la educación en una experiencia vivencial que inspire, movilice e innove."
+>
+  
+  <!-- 1. HERO BANNER: POR QUÉ (FONDO descarga-8-scaled.png) -->
+  <section class="relative min-h-[55vh] sm:min-h-[60vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-20 sm:py-28 bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-8-scaled.png');">
+    <div class="absolute inset-0 bg-[#091E3A]/80 pointer-events-none"></div>
+    
+    <div class="relative max-w-4xl mx-auto space-y-4 sm:space-y-6 z-10">
+      <div class="space-y-2">
+        <p class="text-lg sm:text-xl text-[#f5a623] font-cursive">Nos mueve un poderoso</p>
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white font-heading tracking-tight">POR QUÉ</h1>
+      </div>
+
+      <p class="text-base sm:text-xl md:text-2xl text-slate-200 font-light max-w-3xl mx-auto leading-relaxed">
+        Queremos transformar la educación en una experiencia vivencial que inspire, movilice e innove.
+      </p>
+
+      <!-- Social Circles -->
+      <div class="flex items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4">
+        <a href="https://www.instagram.com/cedepro.ec/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/40 hover:border-white text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95">
+          <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/CedeproEcuador" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/40 hover:border-white text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/cedepro-ecuador-0200a9212/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/40 hover:border-white text-white flex items-center justify-center transition-all hover:scale-110 active:scale-95">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ÚNETE A LA TRANSFORMACIÓN EDUCATIVA -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/e4af6c60-42a8-4e67-9317-8fac384790c9.png');">
+    <div class="absolute inset-0 bg-white/85 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-10">
+      <div class="lg:col-span-6 space-y-2 text-center lg:text-left">
+        <p class="text-lg sm:text-xl text-[#b8860b] font-cursive">Únete a la</p>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading leading-tight">transformación educativa</h2>
+      </div>
+
+      <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center lg:text-left">
+        <p class="text-sm sm:text-base text-[#4a4a4a] leading-relaxed">
+          Somos una entidad que transforma la educación en una experiencia viva. Innovamos con propósito, diseñamos el futuro con visión y construimos caminos para el aprendizaje que inspiran, movilizan e impactan.
+        </p>
+        <div>
+          <a href="http://wa.me/593982867413" target="_blank" rel="noopener noreferrer" class="btn-navy w-full sm:w-auto">
+            Escríbenos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ASÍ ES CÓMO LO HACEMOS (5 PILARES CON ICONOS OFICIALES) -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 text-white bg-cover bg-center overflow-hidden" style="background-image: url('/assets/imagen_2025-06-04_130141663.png');">
+    <div class="absolute inset-0 bg-[#091E3A]/85 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-12 sm:space-y-16 text-center z-10">
+      <div class="space-y-2">
+        <p class="text-lg sm:text-xl text-[#f5a623] font-cursive">Así es</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">CÓMO LO HACEMOS</h2>
+      </div>
+
+      <!-- 5 Columnas Adaptables: 1 col móvil, 2 col tablet pequeña, 3 col tablet grande, 5 col desktop -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
+        {pillars.map((p, idx) => (
+          <div class={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0d2d59]/70 border border-white/10 space-y-4 flex flex-col items-center shadow-lg hover:bg-[#0d2d59]/90 hover:border-white/25 transition-all ${idx === 4 ? 'sm:col-span-2 md:col-span-1 lg:col-span-1' : ''}`}>
+            <div class="w-16 h-16 rounded-full border-2 border-white/40 flex items-center justify-center text-white shrink-0">
+              <svg class="w-8 h-8 fill-current" viewBox={p.viewBox} set:html={p.icon} />
+            </div>
+            <h3 class="text-base sm:text-lg font-bold font-heading tracking-wide">{p.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-300 font-light">{p.subtitle}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. NOS RESPALDA NUESTRA EXPERIENCIA (6 TARJETAS CON BORDE DORADO Y SVGS OFICIALES) -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/896669d7-fe7b-438a-8483-c9755de831ed.png');">
+    <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-12 sm:space-y-16 z-10">
+      <div class="space-y-2 text-center sm:text-left">
+        <p class="text-base sm:text-lg text-[#b8860b] font-cursive">Nos respalda</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading">nuestra experiencia</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+        {experienceItems.map((item) => (
+          <div class="space-y-4 bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+            <div class="w-14 h-14 rounded-full border-2 border-[#b8860b] text-[#b8860b] flex items-center justify-center shrink-0">
+              <svg class="w-7 h-7 fill-current" viewBox={item.viewBox} set:html={item.icon} />
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-[#1a1a1a] font-heading">{item.title}</h3>
+            <p class="text-xs sm:text-sm text-[#4a4a4a] leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. BANNER MOSTAZA / OCRE CON REDES SOCIALES -->
+  <section class="bg-[#b8860b] py-6 sm:py-8 px-4 flex items-center justify-center">
+    <div class="flex items-center gap-4 sm:gap-6">
+      <a href="https://www.instagram.com/cedepro.ec/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white text-white flex items-center justify-center hover:bg-white hover:text-[#b8860b] transition-all active:scale-95">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/CedeproEcuador" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white text-white flex items-center justify-center hover:bg-white hover:text-[#b8860b] transition-all active:scale-95">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/cedepro-ecuador-0200a9212/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white text-white flex items-center justify-center hover:bg-white hover:text-[#b8860b] transition-all active:scale-95">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+      </a>
+      <a href="http://wa.me/593982867413" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-10 h-10 rounded-full border border-white text-white flex items-center justify-center hover:bg-white hover:text-[#b8860b] transition-all active:scale-95">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- 6. ASÍ IMPLEMENTAMOS TODO NUESTRO POTENCIAL -->
+  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga.jpeg');">
+    <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto space-y-12 sm:space-y-16 text-center z-10">
+      <div class="space-y-2">
+        <p class="text-lg sm:text-xl text-[#b8860b] font-cursive">Así implementamos</p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading">todo nuestro potencial</h2>
+      </div>
+
+      <!-- 4 Tarjetas Adaptables con Icono, Título, Descripción y Botón -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {flipCards.map((card) => (
+          <div class="relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-white flex flex-col items-center justify-between space-y-6 bg-cover bg-center border border-white/10 hover:border-white/30 shadow-xl hover:shadow-2xl hover:shadow-[#091E3A]/50 transition-all duration-300 transform hover:-translate-y-1.5 overflow-hidden group">
+            
+            <!-- Dark Navy Overlay with smooth background transition on hover -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#091E3A] via-[#061528] to-[#091E3A] group-hover:from-[#0d2d59] group-hover:via-[#123866] group-hover:to-[#0d2d59] transition-all duration-300 pointer-events-none"></div>
+            
+            <!-- Top: Icon & Title -->
+            <div class="relative z-10 flex flex-col items-center space-y-3 w-full">
+              <div class="w-16 h-16 rounded-full border-2 border-white/40 bg-white/5 flex items-center justify-center text-white group-hover:scale-105 group-hover:border-white group-hover:bg-white/10 transition-all duration-300 shrink-0">
+                <svg class="w-8 h-8 fill-current" viewBox={card.viewBox} set:html={card.icon} />
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold font-heading tracking-wide text-white transition-colors">{card.title}</h3>
+            </div>
+
+            <!-- Middle: Description -->
+            <div class="relative z-10 my-auto text-center">
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+                {card.description}
+              </p>
+            </div>
+
+            <!-- Bottom: Action Button -->
+            <div class="relative z-10 w-full pt-2">
+              <a 
+                href={card.link} 
+                class="btn-outline-white text-xs py-2 px-6 w-full sm:w-auto shadow-md"
+              >
+                Conoce más
+              </a>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
