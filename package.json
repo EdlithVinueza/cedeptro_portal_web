@@ -7,7 +7,12 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:security": "node --experimental-strip-types .agents/skills/cybersecurity-hardening/scripts/test-injection-defense.mjs && node .agents/skills/cybersecurity-hardening/scripts/scan-secrets.mjs && node .agents/skills/cybersecurity-hardening/scripts/audit-security-headers.mjs",
+    "audit:injection": "node --experimental-strip-types .agents/skills/cybersecurity-hardening/scripts/test-injection-defense.mjs",
+    "audit:secrets": "node .agents/skills/cybersecurity-hardening/scripts/scan-secrets.mjs",
+    "audit:headers": "node .agents/skills/cybersecurity-hardening/scripts/audit-security-headers.mjs",
+    "audit:hotlinks": "node .agents/skills/web-migration-astro/scripts/audit-hotlinks.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -1,0 +1,106 @@
+# ==============================================================================
+# CEDETPRO WEB - REGLAS DE SEGURIDAD, ANTI-INYECCIÓN Y HARDENING (.HTACCESS)
+# ==============================================================================
+
+# 1. Deshabilitar listado de directorios (Anti-Information Disclosure)
+Options -Indexes -MultiViews
+
+# 2. Proteger archivos ocultos y de configuración sensible
+<FilesMatch "^\.(env|git|htaccess|htpasswd|ini|log|sh|sql|bak|config)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# 3. Reescribir URLs y Forzar HTTPS
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Forzar HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ----------------------------------------------------------------------------
+  # BLOQUEO DE ATAQUES Y VECTORES DE INYECCIÓN COMUNES (WAF EN .HTACCESS)
+  # ----------------------------------------------------------------------------
+
+  # Bloquear inyecciones SQL en Query String (UNION, SELECT, INSERT, DROP, etc.)
+  RewriteCond %{QUERY_STRING} (?:concat|union|select|insert|cast|set|declare|drop|md5|benchmark)\s*\( [NC,OR]
+  RewriteCond %{QUERY_STRING} (?:--|/\*|#|\b(?:and|or)\b\s+[\d\w]+=[\d\w]+) [NC,OR]
+  RewriteCond %{QUERY_STRING} \b(?:table_name|information_schema|schema_name)\b [NC]
+  RewriteRule ^ - [F,L]
+
+  # Bloquear Cross-Site Scripting (XSS) e inyecciones de script/payloads
+  RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+  RewriteCond %{QUERY_STRING} (<|%3C).*(iframe|object|embed|applet|meta).*(>|%3E) [NC,OR]
+  RewriteCond %{QUERY_STRING} (javascript:|data:|vbscript:) [NC,OR]
+  RewriteCond %{QUERY_STRING} (onload|onerror|onclick|onmouseover)\s*= [NC]
+  RewriteRule ^ - [F,L]
+
+  # Bloquear Directory Traversal / Local File Inclusion (LFI / RFI)
+  RewriteCond %{QUERY_STRING} (\.\./|\.\.\\|%2e%2e%2f|%2e%2e\/|\.\.%2f|%2e%2e%5c) [NC,OR]
+  RewriteCond %{QUERY_STRING} (etc/passwd|boot\.ini|win\.ini|windows/system32) [NC,OR]
+  RewriteCond %{QUERY_STRING} (http|https|ftp):(\/|%2f){2} [NC]
+  RewriteRule ^ - [F,L]
+
+  # ----------------------------------------------------------------------------
+  # BLOQUEO DE SCANNERS Y RUTAS RESIDUALES DE WORDPRESS (MALWARE & BRUTE FORCE)
+  # ----------------------------------------------------------------------------
+
+  # Bloquear accesos a rutas clásicas de WordPress que ya no existen
+  RewriteRule ^(wp-login\.php|xmlrpc\.php|wp-config\.php|wp-admin|wp-includes) - [F,L]
+  RewriteRule ^wp-content/.*\.(php|php5|phtml|exe|sh)$ - [F,L]
+  RewriteRule ^(vendor|eval-stdin\.php|alfa\.php|wso\.php|shell\.php) - [F,L]
+
+  # Bloquear bots y scanners de vulnerabilidades conocidos
+  RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|wpscan|havij|acunetix|dirbuster|nmap|zgrab|masscan) [NC]
+  RewriteRule ^ - [F,L]
+</IfModule>
+
+# 4. Tipos MIME Seguros
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+</IfModule>
+
+# 5. Cabeceras de Seguridad HTTP (OWASP & A+ Security Score)
+<IfModule mod_headers.c>
+  # Prevenir que el navegador interprete MIME types incorrectos
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Prevenir ataques de Clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Activar filtro XSS del navegador
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Política de Referrer estricta
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restricción de APIs del navegador no requeridas
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Forzar conexiones HTTPS (HSTS)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Content Security Policy (CSP) segura
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://wa.me; object-src 'none'; base-uri 'self';"
+</IfModule>
+
+# 6. Compresión Gzip para alto rendimiento
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
+# 7. Caché optimizado de assets estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

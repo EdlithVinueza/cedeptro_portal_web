@@ -20,3 +20,20 @@ pnpm-debug.log*
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Temporary data dumps
+*.json.bak
+all_skills.json
+matched_skills.json
+
+# AI Assistant configurations, Agents, Skills & Rules
+.agents/
+.gemini/
+GEMINI.md
+AGENTS.md
+CLAUDE.md
+.cursor/
+.cursorrules
+.windsurfrules
+skills/
+rules/
