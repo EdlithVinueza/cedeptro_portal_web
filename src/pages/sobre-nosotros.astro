@@ -183,8 +183,8 @@ const flipCards = [
             <div class="w-16 h-16 rounded-full border-2 border-white/40 flex items-center justify-center text-white shrink-0">
               <svg class="w-8 h-8 fill-current" viewBox={p.viewBox} set:html={p.icon} />
             </div>
-            <h3 class="text-base sm:text-lg font-bold font-heading tracking-wide">{p.title}</h3>
-            <p class="text-xs sm:text-sm text-slate-300 font-light">{p.subtitle}</p>
+            <h3 class="text-lg sm:text-xl font-bold font-heading tracking-wide">{p.title}</h3>
+            <p class="text-sm sm:text-base text-slate-200 font-light">{p.subtitle}</p>
           </div>
         ))}
       </div>
@@ -207,8 +207,8 @@ const flipCards = [
             <div class="w-14 h-14 rounded-full border-2 border-[#b8860b] text-[#b8860b] flex items-center justify-center shrink-0">
               <svg class="w-7 h-7 fill-current" viewBox={item.viewBox} set:html={item.icon} />
             </div>
-            <h3 class="text-lg sm:text-xl font-bold text-[#1a1a1a] font-heading">{item.title}</h3>
-            <p class="text-xs sm:text-sm text-[#4a4a4a] leading-relaxed">{item.description}</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-[#1a1a1a] font-heading">{item.title}</h3>
+            <p class="text-sm sm:text-base text-[#4a4a4a] leading-relaxed">{item.description}</p>
           </div>
         ))}
       </div>
@@ -261,7 +261,7 @@ const flipCards = [
 
             <!-- Middle: Description -->
             <div class="relative z-10 my-auto text-center">
-              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-light">
+              <p class="text-sm sm:text-base text-slate-200 leading-relaxed font-light">
                 {card.description}
               </p>
             </div>
@@ -270,7 +270,7 @@ const flipCards = [
             <div class="relative z-10 w-full pt-2">
               <a 
                 href={card.link} 
-                class="btn-outline-white text-xs py-2 px-6 w-full sm:w-auto shadow-md"
+                class="btn-outline-white text-sm py-2.5 px-6 w-full sm:w-auto shadow-md"
               >
                 Conoce más
               </a>
