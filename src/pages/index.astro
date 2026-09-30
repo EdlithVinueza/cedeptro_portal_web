@@ -25,6 +25,20 @@ const partnerLogosRow3 = [
   '15-300x151.png',
   '16-300x74.png'
 ];
+
+/**
+ * Función para controlar los porcentajes y opacidad del degradado del Hero.
+ * @param darkCoveragePercentage - Porcentaje inicial de cobertura oscura sólida (ej: 35 = 35%)
+ * @param fadeEndPercentage - Porcentaje donde el degradado se vuelve 100% transparente (ej: 85 = 85%)
+ * @param darkColor - Color base oscuro corporativo (#07162c)
+ */
+function calculateHeroGradient(darkCoveragePercentage = 40, fadeEndPercentage = 85, darkColor = '#07162c') {
+  const midPoint = Math.round((darkCoveragePercentage + fadeEndPercentage) / 2);
+  return `linear-gradient(to right, ${darkColor} 0%, ${darkColor} ${darkCoveragePercentage}%, rgba(7, 22, 44, 0.85) ${midPoint}%, rgba(7, 22, 44, 0) ${fadeEndPercentage}%)`;
+}
+
+// Puedes modificar los porcentajes aquí directamente (ej: 40% inicio, 85% final):
+const heroGradientStyle = calculateHeroGradient(40, 85);
 ---
 
 <Layout 
@@ -32,17 +46,26 @@ const partnerLogosRow3 = [
   description="Aliados estratégicos, impulsando la calidad y el desarrollo sostenible en la educación"
 >
   
-  <!-- 1. HERO HEADER SECTION -->
-  <section class="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[75vh] flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-32 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-8-2048x819.png');">
-    <div class="absolute inset-0 bg-[#091E3A]/75 pointer-events-none"></div>
+  <!-- 1. HERO HEADER SECTION (100% HEIGHT CON DEGRADADO CONFIGURABLE) -->
+  <section class="relative min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex items-center px-4 sm:px-6 lg:px-12 py-16 sm:py-24 bg-cover bg-center md:bg-right overflow-hidden" style="background-image: url('/assets/new_hero.png');">
+    <!-- Degradado dinámico de izquierda a derecha controlado por la función calculateHeroGradient -->
+    <div class="absolute inset-0 pointer-events-none" style={`background: ${heroGradientStyle};`}></div>
+    <div class="absolute inset-0 bg-black/20 md:bg-transparent pointer-events-none"></div>
     
-    <div class="relative max-w-4xl mx-auto space-y-3 sm:space-y-4 z-10">
-      <p class="text-white text-xl sm:text-2xl md:text-3xl font-cursive">
-        Aliados estratégicos,
-      </p>
-      <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-snug md:leading-tight font-heading">
-        Impulsando la calidad y el desarrollo sostenible en la educación
-      </h1>
+    <div class="relative max-w-7xl mx-auto w-full z-10">
+      <div class="max-w-3xl space-y-4 sm:space-y-6 text-left">
+        <p class="text-white text-xl sm:text-2xl md:text-3xl font-cursive">
+          Aliados estratégicos,
+        </p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight sm:leading-snug md:leading-tight font-heading">
+          Impulsando la calidad y el desarrollo sostenible en la educación
+        </h1>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-4">
+          <a href="/politicas-objetivos" class="btn-outline-white">
+            Gestión de la Calidad
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -73,36 +96,6 @@ const partnerLogosRow3 = [
           <p class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1">Administrativa y normativa</p>
         </div>
       </a>
-
-    </div>
-  </section>
-
-  <!-- 3. SOMOS EXCELENCIA (PARALLAX CON descarga-32.png Y FONDO TRASLÚCIDO) -->
-  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/descarga-32.png');">
-    <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
-
-    <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center z-10">
-      
-      <!-- Izquierda -->
-      <div class="lg:col-span-5 space-y-3 sm:space-y-4 text-center lg:text-left">
-        <p class="text-base sm:text-lg text-[#b8860b] font-cursive">En educación superior</p>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading leading-tight">Somos excelencia</h2>
-        <div class="pt-2 sm:pt-4">
-          <a href="/sobre-nosotros" class="btn-navy w-full sm:w-auto">
-            Quiénes somos
-          </a>
-        </div>
-      </div>
-
-      <!-- Derecha -->
-      <div class="lg:col-span-7 space-y-4 sm:space-y-6 text-[#4a4a4a] leading-relaxed text-sm sm:text-base">
-        <p>
-          En CEDEPRO, transformamos el futuro de la educación superior. Somos el puente entre la innovación y la excelencia, diseñando soluciones estratégicas que elevan instituciones y potencian profesionales. Desde acreditación y gestión hasta formación continua y desarrollo institucional, impulsamos calidad, inclusión y sostenibilidad. No seguimos tendencias, <strong class="text-[#091E3A]">LAS CREAMOS</strong>.
-        </p>
-        <div class="pt-2 flex justify-start">
-          <span class="font-signature text-3xl sm:text-4xl md:text-5xl text-[#333333] block">J. Pablo Morales</span>
-        </div>
-      </div>
 
     </div>
   </section>
@@ -238,8 +231,8 @@ const partnerLogosRow3 = [
         <p class="text-sm sm:text-base text-slate-200 max-w-2xl">de la mano de grandes partners académicos y administrativos para asegurar la excelencia.</p>
       </div>
 
-      <!-- 3 Featured Partner Large White Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+      <!-- 4 Featured Partner & Quality Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
           <img src="/assets/01-300x99.png" alt="Cavilar el siguiente paso" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" loading="lazy" />
@@ -251,10 +244,18 @@ const partnerLogosRow3 = [
           <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">Investigación y análisis de datos IA</p>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 sm:col-span-2 md:col-span-1 border border-slate-100">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
           <img src="/assets/04-300x120.png" alt="Pro & Ciencialink Group-EC" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" loading="lazy" />
           <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">Consultores en educación y tecnología</p>
         </div>
+
+        <a href="/politicas-objetivos" class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-all hover:-translate-y-1 border border-slate-100 group block">
+          <img src="/assets/lg-cedeproiso.webp" alt="Gestión de la Calidad ISO 9001:2015" class="max-h-16 sm:max-h-20 max-w-full object-contain my-auto group-hover:scale-105 transition-transform" loading="lazy" />
+          <p class="text-sm sm:text-base text-[#091E3A] mt-4 font-semibold group-hover:text-[#f5a623] transition-colors flex items-center justify-center gap-1.5">
+            Gestión de la Calidad
+            <span class="text-sm transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </p>
+        </a>
 
       </div>
 

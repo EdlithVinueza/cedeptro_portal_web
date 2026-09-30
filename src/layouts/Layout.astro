@@ -145,27 +145,37 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://cedeproe
     transform: scale(0.97);
   }
 
-  .btn-gold {
-    background-color: #f5a623;
-    color: #091E3A;
+  .btn-gold,
+  .btn-yellow {
+    background-color: #df9417;
+    color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1;
     border-radius: 9999px;
-    padding: 0.65rem 1.6rem;
+    padding: 0.65rem 1.75rem 0.75rem 1.75rem;
+    min-height: 44px;
+    border: 2px solid #df9417;
+    box-shadow: 0 4px 14px rgba(223, 148, 23, 0.35);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
+    user-select: none;
   }
-  .btn-gold:hover {
-    background-color: #e59716;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.3);
+  .btn-gold:hover,
+  .btn-yellow:hover {
+    background-color: #ffffff;
+    color: #091E3A;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 8px 22px rgba(0, 0, 0, 0.25);
   }
-  .btn-gold:active {
+  .btn-gold:active,
+  .btn-yellow:active {
     transform: scale(0.97);
   }
 

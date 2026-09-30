@@ -1,104 +1,295 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+
+/**
+ * Control del difuminado de derecha a izquierda sobre la fotografía:
+ * Va desde blanco sólido a la derecha hacia transparente a la izquierda.
+ * @param whiteStartPercent - Porcentaje donde comienza el blanco sólido a la derecha (ej: 0 = 0%)
+ * @param transparentEndPercent - Porcentaje donde se vuelve transparente hacia la izquierda (ej: 60 = 60%)
+ */
+function calculateHeroGradient(
+  whiteStartPercent = 0,
+  transparentEndPercent = 22,
+) {
+  const midPoint = Math.round((whiteStartPercent + transparentEndPercent) / 2);
+  return `linear-gradient(to left, #ffffff ${whiteStartPercent}%, rgba(255, 255, 255, 0.6) ${midPoint}%, transparent ${transparentEndPercent}%)`;
+}
+
+// Puedes ajustar los porcentajes aquí fácilmente:
+const heroGradientStyle = calculateHeroGradient(0, 22);
 ---
 
-<Layout 
-  title="Políticas y Objetivos de la Calidad – Cedepro Ecuador"
-  description="Política del sistema de Gestión de la Calidad - CEDEPRO Ecuador SAS, certificación ISO 9001:2015."
+<Layout
+  title="Gestión de la Calidad e ISO 9001:2015 – Cedepro Ecuador"
+  description="Política del sistema de Gestión de la Calidad - CEDEPRO Ecuador SAS, certificación internacional ISO 9001:2015."
 >
-  
-  <div class="bg-white py-12 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto space-y-10 sm:space-y-16">
-      
-      <!-- 1. Logo Centrado -->
-      <div class="flex justify-center px-4">
-        <img 
-          src="/assets/lg-cedeproiso.webp" 
-          alt="Cedepro ISO 9001:2015" 
-          class="max-w-[240px] sm:max-w-[340px] md:max-w-[420px] h-auto object-contain"
-          width="420"
-          height="70"
-          loading="eager"
-        />
+  <!-- 1. HERO HEADER (SECCIÓN ALTA: IMAGEN OCUPANDO LA MITAD IZQUIERDA Y TEXTO A LA DERECHA) -->
+  <section
+    class="relative bg-white min-h-[600px] lg:min-h-[680px] flex items-center overflow-hidden border-b border-slate-100"
+  >
+    <!-- Imagen ocupando la mitad izquierda -->
+    <div
+      class="absolute left-0 top-0 bottom-0 w-full md:w-1/2 bg-cover bg-no-repeat bg-center"
+      style="background-image: url('/assets/img-nosotros-section-1.png');"
+    >
+      <!-- Difuminado de derecha a izquierda que se fusiona con el fondo blanco hacia el centro -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style={`background: ${heroGradientStyle};`}
+      >
       </div>
+      <!-- Gradiente vertical para dispositivos móviles -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent md:hidden pointer-events-none"
+      >
+      </div>
+    </div>
 
-      <!-- 2. Política del Sistema de Gestión de la Calidad -->
-      <div class="space-y-4 sm:space-y-6 text-center max-w-4xl mx-auto">
-        <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading tracking-tight leading-tight">
-          Política del sistema de Gestión de la Calidad
+    <!-- Contenido en la mitad derecha sobre fondo blanco puro -->
+    <div
+      class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 w-full z-10 flex justify-end"
+    >
+      <div
+        class="w-full md:w-1/2 md:pl-8 lg:pl-14 max-w-xl lg:max-w-2xl space-y-6 sm:space-y-7 text-left"
+      >
+        <!-- Título Principal en Azul Marino Corporativo -->
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem] font-bold text-[#091E3A] tracking-tight leading-[1.15] font-heading"
+        >
+          El aliado estratégico para el crecimiento de tu institución.
         </h1>
-        
-        <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed text-justify sm:text-center">
-          CEDEPROEcuador SAS es una empresa ecuatoriana dedicada a la consultoría académica, consultoría general y asesoramiento de mejora continua en las Instituciones de Educación y formación del sector público y privado a nivel nacional. Los productos y servicios son elaborados con altos estándares de calidad, procesos actualizados e innovadores, infraestructura física y tecnológica adecuada, personal calificado y comprometido con la mejora continua del SGC que permite atender las necesidades de los clientes en cumplimiento con las disposiciones reglamentarias, legales y los requisitos de las normas ISO 9001:2015, manteniendo un compromiso con la eficacia del SGC implementado.
-        </p>
-      </div>
 
-      <!-- Línea Divisoria -->
-      <div class="border-t border-slate-200 w-full"></div>
-
-      <!-- 3. Objetivos Específicos del SGC + Foto Oficial de Reunión (banner.png) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-        
-        <!-- Left: 3 Objetivos Específicos con Iconos Oficiales Limpios (Sin Tarjetas) -->
-        <div class="lg:col-span-6 space-y-6 sm:space-y-8">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1a1a] font-heading text-center leading-tight">
-            Los objetivos<br />específicos del SGC<br />son:
-          </h2>
-
-          <div class="space-y-6 sm:space-y-7 pt-2">
-            
-            <!-- Objetivo 1: Medalla -->
-            <div class="flex items-center gap-4 sm:gap-5">
-              <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-[#1a1a1a]">
-                <svg class="w-8 h-8 sm:w-9 sm:h-9 fill-current" viewBox="0 0 512 512">
-                  <path d="M223.75 130.75L154.62 15.54A31.997 31.997 0 0 0 127.18 0H16.03C3.08 0-4.5 14.57 2.92 25.18l111.27 158.96c29.72-27.77 67.52-46.83 109.56-53.39zM495.97 0H384.82c-11.24 0-21.66 5.9-27.44 15.54l-69.13 115.21c42.04 6.56 79.84 25.62 109.56 53.38L509.08 25.18C516.5 14.57 508.92 0 495.97 0zM256 160c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm92.52 157.26l-37.93 36.96 8.97 52.22c1.6 9.36-8.26 16.51-16.65 12.09L256 393.88l-46.9 24.65c-8.4 4.45-18.25-2.74-16.65-12.09l8.97-52.22-37.93-36.96c-6.82-6.64-3.05-18.23 6.35-19.59l52.43-7.64 23.43-47.52c2.11-4.28 6.19-6.39 10.28-6.39 4.11 0 8.22 2.14 10.33 6.39l23.43 47.52 52.43 7.64c9.4 1.36 13.17 12.95 6.35 19.59z"/>
-                </svg>
-              </div>
-              <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed">
-                Garantizar la calidad de los productos y servicios elaborados, por medio del seguimiento de los procesos establecidos.
-              </p>
-            </div>
-
-            <!-- Objetivo 2: Bocadillo de Diálogo -->
-            <div class="flex items-center gap-4 sm:gap-5">
-              <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-[#1a1a1a]">
-                <svg class="w-8 h-8 sm:w-9 sm:h-9 fill-current" viewBox="0 0 512 512">
-                  <path d="M144 208c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm112 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zM256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32zm0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29 7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160-93.3 160-208 160z"/>
-                </svg>
-              </div>
-              <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed">
-                Atender todos los reclamos y pedidos de reproceso de los clientes.
-              </p>
-            </div>
-
-            <!-- Objetivo 3: Doble Check -->
-            <div class="flex items-center gap-4 sm:gap-5">
-              <div class="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-[#1a1a1a]">
-                <svg class="w-8 h-8 sm:w-9 sm:h-9 fill-current" viewBox="0 0 512 512">
-                  <path d="M505 174.8l-39.6-39.6c-9.4-9.4-24.6-9.4-33.9 0L192 374.7 80.6 263.2c-9.4-9.4-24.6-9.4-33.9 0L7 302.9c-9.4 9.4-9.4 24.6 0 34L175 505c9.4 9.4 24.6 9.4 33.9 0l296-296.2c9.4-9.5 9.4-24.7.1-34zm-324.3 106c6.2 6.3 16.4 6.3 22.6 0l208-208.2c6.2-6.3 6.2-16.4 0-22.6L366.1 4.7c-6.2-6.3-16.4-6.3-22.6 0L192 156.2l-55.4-55.5c-6.2-6.3-16.4-6.3-22.6 0L68.7 146c-6.2 6.3-6.2 16.4 0 22.6l112 112.2z"/>
-                </svg>
-              </div>
-              <p class="text-[#4a4a4a] text-sm sm:text-base leading-relaxed">
-                Mantener una evaluación semestral de los proveedores para garantizar la calidad de los servicios que entregan.
-              </p>
-            </div>
-
-          </div>
+        <!-- Párrafos descriptivos oficiales (sin botones) -->
+        <div
+          class="space-y-4 text-[#4a4a4a] text-sm sm:text-base md:text-[1.05rem] leading-relaxed"
+        >
+          <p>
+            En <strong class="text-[#091E3A]">CEDEPRO</strong> creemos que la calidad
+            no es solo una certificación, es un compromiso que se demuestra en cada
+            producto, en cada servicio y en cada institución que acompañamos.
+          </p>
+          <p>
+            Desde <strong>noviembre de 2024</strong>, nuestra certificación <strong
+              class="text-[#c88d10]">ISO 9001:2015</strong
+            > reafirma ese compromiso y nos impulsa a seguir trabajando con excelencia,
+            responsabilidad y pasión.
+          </p>
+          <p>
+            Porque cuando acompañamos a las instituciones de educación y
+            formación, sabemos que también estamos contribuyendo a construir un
+            mejor futuro.
+          </p>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Right: Foto Oficial del Equipo en Reunión con Pantalla (banner.png) -->
-        <div class="lg:col-span-6 overflow-hidden shadow-xl border border-slate-200 flex items-center justify-center bg-slate-100">
-          <img 
-            src="/assets/banner.png" 
-            alt="Equipo Cedepro Ecuador Reunión SGC" 
-            class="w-full h-56 sm:h-72 lg:h-80 object-cover object-center"
+  <!-- 2. SECCIÓN: POLÍTICA DEL SISTEMA DE GESTIÓN DE LA CALIDAD + CERTIFICADO OFICIAL DESTACADO -->
+  <section
+    id="politica"
+    class="py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 bg-[#fafbfc] border-b border-slate-200/80"
+  >
+    <div
+      class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+    >
+      <!-- Columna Izquierda: Logo Oficial, Título y Declaración de Política -->
+      <div
+        class="lg:col-span-7 space-y-5 sm:space-y-6 text-center sm:text-left"
+      >
+        <h2
+          class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#091E3A] font-heading tracking-tight leading-tight"
+        >
+          Política del sistema de Gestión de la Calidad
+        </h2>
+
+        <p
+          class="text-[#333333] text-sm sm:text-base md:text-[1.05rem] leading-relaxed text-justify sm:text-left font-normal"
+        >
+          CEDEPROEcuador SAS es una empresa ecuatoriana dedicada a la
+          consultoría académica, consultoría general y asesoramiento de mejora
+          continua en las Instituciones de Educación y formación del sector
+          público y privado a nivel nacional. Los productos y servicios son
+          elaborados con altos estándares de calidad, procesos actualizados e
+          innovadores, infraestructura física y tecnológica adecuada, personal
+          calificado y comprometido con la mejora continua del SGC que permite
+          atender las necesidades de los clientes en cumplimiento con las
+          disposiciones reglamentarias, legales y los requisitos de las normas
+          ISO 9001:2015, manteniendo un compromiso con la eficacia del SGC
+          implementado.
+        </p>
+
+        <!-- Logo Centrado en móvil, a la izquierda en desktop -->
+        <div class="flex justify-center sm:justify-start">
+          <img
+            src="/assets/lg-cedeproiso.webp"
+            alt="Cedepro Centro de Desarrollo Educativo y Profesional - IAS STAREGISTER ISO 9001:2015"
+            class="max-w-[280px] sm:max-w-[360px] md:max-w-[420px] h-auto object-contain"
+            width="420"
+            height="70"
             loading="lazy"
           />
         </div>
-
       </div>
 
-    </div>
-  </div>
+      <!-- Columna Derecha: Certificado Completo con Borde Recto Difuminado (Azul a Amarillo sin tonos verdes) -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div
+          class="relative w-full max-w-[200px] sm:max-w-[340px] md:max-w-[360px] group"
+        >
+          <!-- Aura con difuminado sutil y recto: Azul Marino a Dorado CEDEPRO (sin mezcla verdosa) -->
+          <div
+            class="absolute -inset-1.5 bg-gradient-to-l from-[#091E3A] via-[#d4a017] to-[#f5a623] rounded-none blur-md opacity-60 group-hover:opacity-85 transition-opacity duration-300"
+          >
+          </div>
 
+          <!-- Borde recto fino difuminado sobre la imagen completa con sutil hover -->
+          <div
+            class="relative p-[2.5px] rounded-none bg-gradient-to-l from-[#091E3A] via-[#d4a017] to-[#f5a623] shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.015]"
+          >
+            <div
+              class="block rounded-none overflow-hidden bg-white shadow-inner"
+            >
+              <img
+                src="/assets/certificado_iso.png"
+                alt="Certificado Oficial ISO 9001:2015 CEDEPRO Ecuador"
+                class="w-full h-auto object-contain block rounded-none transition-transform duration-500 group-hover:scale-[1.015]"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. OBJETIVOS DEL SISTEMA DE GESTIÓN DE LA CALIDAD -->
+  <section
+    id="objetivos"
+    class="relative bg-white min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden border-b border-slate-100 scroll-mt-20"
+    aria-labelledby="sgc-title"
+  >
+    <!-- Imagen ocupando la mitad derecha (full bleed hasta el borde derecho de la pantalla) -->
+    <div
+      class="absolute right-0 top-0 bottom-0 w-full md:w-[55%] lg:w-[58%] overflow-hidden hidden md:block"
+    >
+      <img
+        src="/assets/objetivos-sgc-academicos.webp"
+        alt="Profesionales de consultoría académica revisan documentos y procesos de mejora en una institución educativa."
+        class="w-full h-full object-cover object-[92%_center]"
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- Difuminado suave de izquierda a derecha para fusionarse con el fondo blanco -->
+      <div
+        class="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-white/40 to-transparent w-1/3"
+      >
+      </div>
+    </div>
+
+    <!-- Contenido en la mitad izquierda pegado directamente al borde del contenedor max-w-7xl -->
+    <div
+      class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 w-full z-10 flex flex-col md:flex-row justify-start"
+    >
+      <div
+        class="w-full md:w-[45%] lg:w-[42%] md:pr-6 lg:pr-10 space-y-6 sm:space-y-7 text-left"
+      >
+        <h2
+          id="sgc-title"
+          class="text-3xl sm:text-4xl md:text-[2.5rem] font-bold text-[#091E3A] font-heading tracking-tight leading-[1.2]"
+        >
+          Los objetivos específicos del SGC son:
+        </h2>
+
+        <ul class="space-y-4">
+          <li
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+          >
+            <svg
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              viewBox="0 0 48 48"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M5 3h10l9 14-9 7L5 3Zm28 0h10L33 24l-9-7L33 3Z"></path>
+              <circle cx="24" cy="31" r="15"></circle>
+              <path
+                d="m24 21 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2 1.2-6.8-5-4.9 6.9-1Z"
+                fill="white"></path>
+            </svg>
+            <p
+              class="m-0 text-[#1e293b] text-sm sm:text-[14.5px] leading-relaxed font-medium"
+            >
+              Garantizar la calidad de los productos y servicios elaborados, por
+              medio del seguimiento de los procesos establecidos.
+            </p>
+          </li>
+
+          <li
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+          >
+            <svg
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              viewBox="0 0 48 48"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M43 22c0 10-9 18-20 18-3 0-6-.6-9-2L5 43l3-11c-3-3-4-6-4-10C4 12 13 4 24 4s19 8 19 18Z"
+              ></path>
+              <g fill="currentColor" stroke="none"
+                ><circle cx="15" cy="22" r="2.5"></circle><circle
+                  cx="24"
+                  cy="22"
+                  r="2.5"></circle><circle cx="33" cy="22" r="2.5"></circle></g
+              >
+            </svg>
+            <p
+              class="m-0 text-[#1e293b] text-sm sm:text-[14.5px] leading-relaxed font-medium"
+            >
+              Atender todos los reclamos y pedidos de reproceso de los clientes.
+            </p>
+          </li>
+
+          <li
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+          >
+            <svg
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              viewBox="0 0 48 48"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="6"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              aria-hidden="true"
+            >
+              <path d="m7 18 9 9L35 8M7 32l9 9 25-25"></path>
+            </svg>
+            <p
+              class="m-0 text-[#1e293b] text-sm sm:text-[14.5px] leading-relaxed font-medium"
+            >
+              Mantener una evaluación semestral de los proveedores para
+              garantizar la calidad de los servicios que entregan.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Imagen en móvil visible debajo del contenido -->
+      <div class="mt-8 md:hidden rounded-2xl overflow-hidden shadow-lg">
+        <img
+          src="/assets/objetivos-sgc-academicos.webp"
+          alt="Profesionales de consultoría académica"
+          class="w-full h-64 object-cover object-[85%_center]"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
 </Layout>
