@@ -1,88 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-/**
- * Control del difuminado de derecha a izquierda sobre la fotografía:
- * Va desde blanco sólido a la derecha hacia transparente a la izquierda.
- * @param whiteStartPercent - Porcentaje donde comienza el blanco sólido a la derecha (ej: 0 = 0%)
- * @param transparentEndPercent - Porcentaje donde se vuelve transparente hacia la izquierda (ej: 60 = 60%)
- */
-function calculateHeroGradient(
-  whiteStartPercent = 0,
-  transparentEndPercent = 22,
-) {
-  const midPoint = Math.round((whiteStartPercent + transparentEndPercent) / 2);
-  return `linear-gradient(to left, #ffffff ${whiteStartPercent}%, rgba(255, 255, 255, 0.6) ${midPoint}%, transparent ${transparentEndPercent}%)`;
-}
-
-// Puedes ajustar los porcentajes aquí fácilmente:
-const heroGradientStyle = calculateHeroGradient(0, 22);
----
+import Layout from "../layouts/Layout.astro";---
 
 <Layout
   title="Gestión de la Calidad e ISO 9001:2015 – Cedepro Ecuador"
   description="Política del sistema de Gestión de la Calidad - CEDEPRO Ecuador SAS, certificación internacional ISO 9001:2015."
 >
-  <!-- 1. HERO HEADER (SECCIÓN ALTA: IMAGEN OCUPANDO LA MITAD IZQUIERDA Y TEXTO A LA DERECHA) -->
-  <section
-    class="relative bg-white min-h-[600px] lg:min-h-[680px] flex items-center overflow-hidden border-b border-slate-100"
-  >
-    <!-- Imagen ocupando la mitad izquierda -->
-    <div
-      class="absolute left-0 top-0 bottom-0 w-full md:w-1/2 bg-cover bg-no-repeat bg-center"
-      style="background-image: url('/assets/img-nosotros-section-1.png');"
-    >
-      <!-- Difuminado de derecha a izquierda que se fusiona con el fondo blanco hacia el centro -->
-      <div
-        class="absolute inset-0 pointer-events-none"
-        style={`background: ${heroGradientStyle};`}
-      >
-      </div>
-      <!-- Gradiente vertical para dispositivos móviles -->
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent md:hidden pointer-events-none"
-      >
-      </div>
-    </div>
-
-    <!-- Contenido en la mitad derecha sobre fondo blanco puro -->
-    <div
-      class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28 w-full z-10 flex justify-end"
-    >
-      <div
-        class="w-full md:w-1/2 md:pl-8 lg:pl-14 max-w-xl lg:max-w-2xl space-y-6 sm:space-y-7 text-left"
-      >
-        <!-- Título Principal en Azul Marino Corporativo -->
-        <h1
-          class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem] font-bold text-[#091E3A] tracking-tight leading-[1.15] font-heading"
-        >
-          El aliado estratégico para el crecimiento de tu institución.
-        </h1>
-
-        <!-- Párrafos descriptivos oficiales (sin botones) -->
-        <div
-          class="space-y-4 text-[#4a4a4a] text-sm sm:text-base md:text-[1.05rem] leading-relaxed"
-        >
-          <p>
-            En <strong class="text-[#091E3A]">CEDEPRO</strong> creemos que la calidad
-            no es solo una certificación, es un compromiso que se demuestra en cada
-            producto, en cada servicio y en cada institución que acompañamos.
-          </p>
-          <p>
-            Desde <strong>noviembre de 2024</strong>, nuestra certificación <strong
-              class="text-[#c88d10]">ISO 9001:2015</strong
-            > reafirma ese compromiso y nos impulsa a seguir trabajando con excelencia,
-            responsabilidad y pasión.
-          </p>
-          <p>
-            Porque cuando acompañamos a las instituciones de educación y
-            formación, sabemos que también estamos contribuyendo a construir un
-            mejor futuro.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- 2. SECCIÓN: POLÍTICA DEL SISTEMA DE GESTIÓN DE LA CALIDAD + CERTIFICADO OFICIAL DESTACADO -->
   <section
@@ -121,12 +43,12 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
         <!-- Logo Centrado en móvil, a la izquierda en desktop -->
         <div class="flex justify-center sm:justify-start">
           <img
-            src="/assets/lg-cedeproiso.webp"
+            src="/assets/certificaciones/logo_cedepro_iso.webp"
             alt="Cedepro Centro de Desarrollo Educativo y Profesional - IAS STAREGISTER ISO 9001:2015"
             class="max-w-[280px] sm:max-w-[360px] md:max-w-[420px] h-auto object-contain"
             width="420"
             height="70"
-            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -138,22 +60,22 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
         >
           <!-- Aura con difuminado sutil y recto: Azul Marino a Dorado CEDEPRO (sin mezcla verdosa) -->
           <div
-            class="absolute -inset-1.5 bg-gradient-to-l from-[#091E3A] via-[#d4a017] to-[#f5a623] rounded-none blur-md opacity-60 group-hover:opacity-85 transition-opacity duration-300"
+            class="absolute -inset-1.5 bg-gradient-to-l from-[#091E3A] via-[#D48D15] to-[#D48D15] rounded-none blur-md opacity-60 group-hover:opacity-85 transition-opacity duration-300"
           >
           </div>
 
           <!-- Borde recto fino difuminado sobre la imagen completa con sutil hover -->
           <div
-            class="relative p-[2.5px] rounded-none bg-gradient-to-l from-[#091E3A] via-[#d4a017] to-[#f5a623] shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.015]"
+            class="relative p-[2.5px] rounded-none bg-gradient-to-l from-[#091E3A] via-[#D48D15] to-[#D48D15] shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.015]"
           >
             <div
               class="block rounded-none overflow-hidden bg-white shadow-inner"
             >
               <img
-                src="/assets/certificado_iso.png"
+                src="/assets/certificaciones/certificado_iso_9001.png"
                 alt="Certificado Oficial ISO 9001:2015 CEDEPRO Ecuador"
                 class="w-full h-auto object-contain block rounded-none transition-transform duration-500 group-hover:scale-[1.015]"
-                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -173,12 +95,11 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
       class="absolute right-0 top-0 bottom-0 w-full md:w-[55%] lg:w-[58%] overflow-hidden hidden md:block"
     >
       <img
-        src="/assets/objetivos-sgc-academicos.webp"
+        src="/assets/nosotros/objetivos_academicos.webp"
         alt="Profesionales de consultoría académica revisan documentos y procesos de mejora en una institución educativa."
         class="w-full h-full object-cover object-[92%_center]"
         width="1536"
         height="1024"
-        loading="lazy"
         decoding="async"
       />
       <!-- Difuminado suave de izquierda a derecha para fusionarse con el fondo blanco -->
@@ -204,10 +125,10 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
 
         <ul class="space-y-4">
           <li
-            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#D48D15] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#D48D15] transition-all duration-200"
           >
             <svg
-              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#D48D15]"
               viewBox="0 0 48 48"
               fill="currentColor"
               aria-hidden="true"
@@ -227,10 +148,10 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
           </li>
 
           <li
-            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#D48D15] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#D48D15] transition-all duration-200"
           >
             <svg
-              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#D48D15]"
               viewBox="0 0 48 48"
               fill="none"
               stroke="currentColor"
@@ -257,10 +178,10 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
           </li>
 
           <li
-            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#f5a623] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#df9417] transition-all duration-200"
+            class="flex items-center gap-4 sm:gap-5 bg-white border-[1.5px] border-[#D48D15] rounded-2xl p-4 sm:p-5 shadow-[0_4px_14px_rgba(245,166,35,0.08)] hover:shadow-[0_8px_22px_rgba(245,166,35,0.18)] hover:-translate-y-0.5 hover:border-[#D48D15] transition-all duration-200"
           >
             <svg
-              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#f5a623]"
+              class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 text-[#D48D15]"
               viewBox="0 0 48 48"
               fill="none"
               stroke="currentColor"
@@ -284,10 +205,10 @@ const heroGradientStyle = calculateHeroGradient(0, 22);
       <!-- Imagen en móvil visible debajo del contenido -->
       <div class="mt-8 md:hidden rounded-2xl overflow-hidden shadow-lg">
         <img
-          src="/assets/objetivos-sgc-academicos.webp"
+          src="/assets/nosotros/objetivos_academicos.webp"
           alt="Profesionales de consultoría académica"
           class="w-full h-64 object-cover object-[85%_center]"
-          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>
