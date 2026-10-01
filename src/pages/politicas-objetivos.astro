@@ -1,10 +1,77 @@
 ---
-import Layout from "../layouts/Layout.astro";---
+import Layout from "../layouts/Layout.astro";
+import { calculateGradient } from "../utils/gradients";
+
+// --- CONTROLES DE DIFUMINADO (SECCIÓN OBJETIVOS) ---
+
+// Puedes modificar los porcentajes aquí directamente para escritorio:
+// (0% a 100%, color base blanco #ffffff, dirección to right)
+const objGradientDesktop = calculateGradient(0, 100, "#ffffff", "to right");
+const objFadeWidth = "40%"; // Ancho del div que contiene este difuminado
+
+// Controles para el móvil (Estilo Hero pero en blanco)
+const objMobileExtraSpace = "45vh"; // Espacio abajo para mostrar la imagen
+const objMobileBgSize = "auto 50vh"; // Tamaño de la foto
+const objMobileImageHeight = "50vh"; // IMPORTANTE: Debe ser igual a la altura de arriba para tapar el borde
+const objMobileBgPosition = "100% bottom";
+const objMobileBlurOverlap = "4vh"; // Qué tanto penetra el difuminado hacia adentro de la foto para tapar el borde
+const objMobileBlurEnd = "75%"; // Dónde termina de difuminarse (100% es el fondo de la pantalla)
+---
 
 <Layout
   title="Gestión de la Calidad e ISO 9001:2015 – Cedepro Ecuador"
   description="Política del sistema de Gestión de la Calidad - CEDEPRO Ecuador SAS, certificación internacional ISO 9001:2015."
 >
+  <style
+    define:vars={{
+      objFadeW: objFadeWidth,
+      mExtraSpace: objMobileExtraSpace,
+      mBgSize: objMobileBgSize,
+      mImgHeight: objMobileImageHeight,
+      mBgPos: objMobileBgPosition,
+      mBlurOverlap: objMobileBlurOverlap,
+      mBlurEnd: objMobileBlurEnd,
+    }}
+  >
+    .objetivos-fade {
+      width: var(--objFadeW);
+    }
+
+    /* Estilos móviles tipo Hero */
+    .obj-bg-dynamic {
+      background-position:
+        center top,
+        var(--mBgPos);
+      padding-bottom: var(--mExtraSpace);
+      background-size:
+        100% 100%,
+        var(--mBgSize);
+      background-repeat: no-repeat, no-repeat;
+      background-color: white;
+      background-image: 
+        /* Capa 1: Degradado blanco que baja hasta sobrepasar el borde de la foto y luego se difumina */
+        linear-gradient(
+          to bottom,
+          white 0%,
+          white calc(100% - var(--mImgHeight) + var(--mBlurOverlap)),
+          rgba(255, 255, 255, 0) var(--mBlurEnd)
+        ),
+        /* Capa 2: La foto */ url("/assets/nosotros/objetivos_academicos.webp");
+    }
+    .obj-text-mobile-fade {
+      background: none;
+    }
+
+    @media (min-width: 768px) {
+      .obj-bg-dynamic {
+        background-position: right center;
+        padding-bottom: 0;
+        background-size: cover;
+        background-image: none; /* En desktop la imagen está en un div separado */
+        background-color: white;
+      }
+    }
+  </style>
 
   <!-- 2. SECCIÓN: POLÍTICA DEL SISTEMA DE GESTIÓN DE LA CALIDAD + CERTIFICADO OFICIAL DESTACADO -->
   <section
@@ -87,7 +154,7 @@ import Layout from "../layouts/Layout.astro";---
   <!-- 3. OBJETIVOS DEL SISTEMA DE GESTIÓN DE LA CALIDAD -->
   <section
     id="objetivos"
-    class="relative bg-white min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden border-b border-slate-100 scroll-mt-20"
+    class="obj-bg-dynamic relative min-h-[110vh] md:min-h-[580px] lg:min-h-[640px] flex items-start md:items-center overflow-hidden scroll-mt-20"
     aria-labelledby="sgc-title"
   >
     <!-- Imagen ocupando la mitad derecha (full bleed hasta el borde derecho de la pantalla) -->
@@ -104,14 +171,15 @@ import Layout from "../layouts/Layout.astro";---
       />
       <!-- Difuminado suave de izquierda a derecha para fusionarse con el fondo blanco -->
       <div
-        class="absolute inset-0 pointer-events-none bg-gradient-to-r from-white via-white/40 to-transparent w-1/3"
+        class="objetivos-fade absolute inset-0 pointer-events-none"
+        style={`background: ${objGradientDesktop};`}
       >
       </div>
     </div>
 
     <!-- Contenido en la mitad izquierda pegado directamente al borde del contenedor max-w-7xl -->
     <div
-      class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 w-full z-10 flex flex-col md:flex-row justify-start"
+      class="obj-text-mobile-fade relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-24 sm:py-20 lg:py-24 w-full z-10 flex flex-col md:flex-row justify-start"
     >
       <div
         class="w-full md:w-[45%] lg:w-[42%] md:pr-6 lg:pr-10 space-y-6 sm:space-y-7 text-left"
@@ -202,15 +270,7 @@ import Layout from "../layouts/Layout.astro";---
         </ul>
       </div>
 
-      <!-- Imagen en móvil visible debajo del contenido -->
-      <div class="mt-8 md:hidden rounded-2xl overflow-hidden shadow-lg">
-        <img
-          src="/assets/nosotros/objetivos_academicos.webp"
-          alt="Profesionales de consultoría académica"
-          class="w-full h-64 object-cover object-[85%_center]"
-          decoding="async"
-        />
-      </div>
+      <!-- En móvil, la imagen ahora se maneja como fondo (estilo Hero) y se difumina con el texto blanco -->
     </div>
   </section>
 </Layout>

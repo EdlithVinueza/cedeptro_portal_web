@@ -1,76 +1,145 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { calculateGradient } from "../utils/gradients";
 
 const partnerLogosRow1 = [
-  'partners/partner_1.png',
-  'partners/partner_3.png',
-  'partners/partner_5.png',
-  'partners/partner_6.png'
+  "partners/partner_1.png",
+  "partners/partner_3.png",
+  "partners/partner_5.png",
+  "partners/partner_6.png",
 ];
 
 const partnerLogosRow2 = [
-  'partners/partner_8.png',
-  'partners/partner_9.png',
-  'partners/partner_10.png',
-  'partners/partner_11.png',
-  'partners/partner_12.png',
-  'partners/partner_13.png'
+  "partners/partner_8.png",
+  "partners/partner_9.png",
+  "partners/partner_10.png",
+  "partners/partner_11.png",
+  "partners/partner_12.png",
+  "partners/partner_13.png",
 ];
 
 const partnerLogosRow3 = [
-  'partners/partner_14.png',
-  'partners/partner_15.png',
-  'partners/partner_16.png',
-  'partners/partner_17.png',
-  'partners/partner_18.png',
-  'partners/partner_19.png'
+  "partners/partner_14.png",
+  "partners/partner_15.png",
+  "partners/partner_16.png",
+  "partners/partner_17.png",
+  "partners/partner_18.png",
+  "partners/partner_19.png",
 ];
 
-/**
- * Función para controlar los porcentajes y opacidad del degradado del Hero.
- * @param darkCoveragePercentage - Porcentaje inicial de cobertura oscura sólida (ej: 35 = 35%)
- * @param fadeEndPercentage - Porcentaje donde el degradado se vuelve 100% transparente (ej: 85 = 85%)
- * @param darkColor - Color base oscuro corporativo (#07162c)
- */
-function calculateHeroGradient(darkCoveragePercentage = 40, fadeEndPercentage = 85, darkColor = '#07162c') {
-  const midPoint = Math.round((darkCoveragePercentage + fadeEndPercentage) / 2);
-  return `linear-gradient(to right, ${darkColor} 0%, ${darkColor} ${darkCoveragePercentage}%, rgba(7, 22, 44, 0.85) ${midPoint}%, rgba(7, 22, 44, 0) ${fadeEndPercentage}%)`;
-}
+// Puedes modificar los porcentajes del difuminado de PC aquí directamente:
+const heroGradientDesktop = calculateGradient(
+  40,
+  85,
+  "#07162c",
+  "to right",
+);
 
-// Puedes modificar los porcentajes aquí directamente (ej: 40% inicio, 85% final):
-const heroGradientStyle = calculateHeroGradient(40, 85);
+// Configuraciones para acomodar la foto y espacio en móviles
+const heroBgPositionMobile = "90% 100%"; // 20% mueve la imagen hacia la izquierda. 100% la pega abajo.
+const heroBgPositionDesktop = "right center";
+const heroMobileExtraSpace = "30vh"; // Espacio extra inferior.
+const heroBgSizeMobile = "auto 60vh"; // ¡NUEVO! Controla el tamaño de la foto (60% de la altura de la pantalla).
+const heroTextFadeStart = "calc(90% - 130px)"; // Empieza a difuminarse justo debajo del botón (130px es el padding bottom).
+const heroTextFadeEnd = "100%"; // Termina de difuminarse al final del contenedor.
 ---
 
-<Layout 
+<Layout
   title="Cedepro Ecuador – Cedepro"
   description="Aliados estratégicos, impulsando la calidad y el desarrollo sostenible en la educación"
 >
-  
+  <style
+    define:vars={{
+      bgPosMobile: heroBgPositionMobile,
+      bgPosDesktop: heroBgPositionDesktop,
+      extraSpace: heroMobileExtraSpace,
+      bgSizeMobile: heroBgSizeMobile,
+      fadeStart: heroTextFadeStart,
+      fadeEnd: heroTextFadeEnd,
+    }}
+  >
+    .hero-bg-dynamic {
+      background-position: var(--bgPosMobile);
+      padding-bottom: var(--extraSpace);
+      background-size: var(--bgSizeMobile);
+      background-repeat: no-repeat;
+      background-color: #07162c;
+    }
+    .hero-text-mobile-fade {
+      background: linear-gradient(
+        to bottom,
+        #07162c 0%,
+        #07162c var(--fadeStart),
+        rgba(7, 22, 44, 0) var(--fadeEnd)
+      );
+    }
+    @media (min-width: 768px) {
+      .hero-bg-dynamic {
+        background-position: var(--bgPosDesktop);
+        padding-bottom: 0;
+        background-size: cover;
+      }
+      .hero-text-mobile-fade {
+        background: none;
+      }
+    }
+  </style>
+
   <!-- 1. HERO HEADER SECTION (100% HEIGHT CON DEGRADADO CONFIGURABLE) -->
-  <section class="relative min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] flex items-center px-4 sm:px-6 lg:px-12 py-16 sm:py-24 bg-cover bg-center md:bg-right overflow-hidden" style="background-image: url('/assets/banners/hero_principal.png');">
-    <!-- Degradado dinámico de izquierda a derecha controlado por la función calculateHeroGradient -->
-    <div class="absolute inset-0 pointer-events-none" style={`background: ${heroGradientStyle};`}></div>
-    <div class="absolute inset-0 bg-black/20 md:bg-transparent pointer-events-none"></div>
-    
-    <div class="relative max-w-7xl mx-auto w-full z-10">
-      <div class="max-w-4xl md:-ml-4 lg:-ml-8 xl:-ml-12 space-y-5 sm:space-y-6 text-left text-lg sm:text-xl md:text-[1.4rem] font-light leading-relaxed text-white/95 tracking-wide">
+  <section
+    class="hero-bg-dynamic relative min-h-[110vh] md:min-h-[calc(100vh-5rem)] flex items-start md:items-center px-0 md:px-6 lg:px-12 pt-0 md:py-16 lg:py-24 overflow-hidden"
+    style="background-image: url('/assets/banners/hero_principal.png');"
+  >
+    <!-- Degradado para Desktop (horizontal, oculto en móviles) -->
+    <div
+      class="absolute inset-0 pointer-events-none hidden md:block"
+      style={`background: ${heroGradientDesktop};`}
+    >
+    </div>
+
+    <div
+      class="absolute inset-0 bg-black/10 md:bg-transparent pointer-events-none"
+    >
+    </div>
+
+    <!-- Contenedor del texto: En móviles tiene fondo con degradado vertical que envuelve al texto y luego se difumina -->
+    <div
+      class="hero-text-mobile-fade relative max-w-7xl mx-auto w-full z-10 px-4 pt-12 pb-32 sm:px-8 md:px-0 md:py-0"
+    >
+      <div
+        class="max-w-4xl md:-ml-4 lg:-ml-8 xl:-ml-12 space-y-5 sm:space-y-6 text-left text-lg sm:text-xl md:text-[1.4rem] font-light leading-relaxed text-white/95 tracking-wide"
+      >
         <h1 class="font-light">
-          En <strong class="font-bold text-white">CEDEPRO</strong> creemos que la calidad no es solo una certificación,<br class="hidden lg:block" />
-          es un compromiso que se demuestra en cada producto,<br class="hidden lg:block" />
+          En <strong class="font-bold text-white">CEDEPRO</strong> creemos que la
+          calidad no es solo una certificación,<br class="hidden lg:block" />
+          es un compromiso que se demuestra en cada producto,<br
+            class="hidden lg:block"
+          />
           en cada servicio y en cada institución que acompañamos.
         </h1>
         <p>
-          Desde <strong class="font-bold text-white">noviembre de 2024</strong>, nuestra certificación <strong class="font-bold text-[#D48D15]">ISO<br class="hidden lg:block" />
-          9001:2015</strong> reafirma ese compromiso y nos impulsa a seguir<br class="hidden lg:block" />
+          Desde <strong class="font-bold text-white">noviembre de 2024</strong>,
+          nuestra certificación <strong class="font-bold text-[#D48D15]"
+            >ISO<br class="hidden lg:block" />
+            9001:2015</strong
+          > reafirma ese compromiso y nos impulsa a seguir<br
+            class="hidden lg:block"
+          />
           trabajando con excelencia, responsabilidad y pasión.
         </p>
         <p>
-          Porque cuando acompañamos a las instituciones<br class="hidden lg:block" />
-          de educación y formación, sabemos que también<br class="hidden lg:block" />
+          Porque cuando acompañamos a las instituciones<br
+            class="hidden lg:block"
+          />
+          de educación y formación, sabemos que también<br
+            class="hidden lg:block"
+          />
           estamos contribuyendo a construir un mejor futuro.
         </p>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-4">
+        <div
+          class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 pt-4"
+        >
           <a href="/politicas-objetivos" class="btn-outline-white">
             Gestión de la Calidad
           </a>
@@ -82,48 +151,102 @@ const heroGradientStyle = calculateHeroGradient(40, 85);
   <!-- 2. TRES COLUMNAS FOTOGRÁFICAS ORIGINALES (DISEÑO, ACREDITACIÓN, CONSULTORÍA) -->
   <section class="w-full bg-[#091E3A]">
     <div class="grid grid-cols-1 md:grid-cols-3">
-      
       <!-- Banner 1: Diseño de Carreras (descarga-21.png) -->
-      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300" style="background-image: url('/assets/portafolio/diseno_carreras.png');">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
-          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Diseño de Carreras</h3>
-          <p class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1">Planes académicos estratégicos</p>
+      <a
+        href="/portafolio"
+        class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300"
+        style="background-image: url('/assets/portafolio/diseno_carreras.png');"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors"
+        >
+          <h3
+            class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform"
+          >
+            Diseño de Carreras
+          </h3>
+          <p
+            class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1"
+          >
+            Planes académicos estratégicos
+          </p>
         </div>
       </a>
 
       <!-- Banner 2: Procesos de acreditación (acreditacion-1.png) -->
-      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 md:border-l md:border-r border-white/10" style="background-image: url('/assets/portafolio/procesos_acreditacion.png');">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
-          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Procesos de acreditación</h3>
-          <p class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1">Cumplimiento y excelencia</p>
+      <a
+        href="/portafolio"
+        class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 md:border-l md:border-r border-white/10"
+        style="background-image: url('/assets/portafolio/procesos_acreditacion.png');"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors"
+        >
+          <h3
+            class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform"
+          >
+            Procesos de acreditación
+          </h3>
+          <p
+            class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1"
+          >
+            Cumplimiento y excelencia
+          </p>
         </div>
       </a>
 
       <!-- Banner 3: Consultoría en gestión (descarga-42.png) -->
-      <a href="/portafolio" class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 border-white/10" style="background-image: url('/assets/portafolio/consultoria_gestion.png');">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors">
-          <h3 class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform">Consultoría en gestión</h3>
-          <p class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1">Administrativa y normativa</p>
+      <a
+        href="/portafolio"
+        class="relative group h-60 sm:h-72 md:h-80 overflow-hidden block bg-cover bg-center transition-all duration-300 border-t md:border-t-0 border-white/10"
+        style="background-image: url('/assets/portafolio/consultoria_gestion.png');"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 flex flex-col justify-end p-6 sm:p-8 group-hover:from-black/95 transition-colors"
+        >
+          <h3
+            class="text-xl sm:text-2xl font-bold text-white font-heading transform group-hover:-translate-y-0.5 transition-transform"
+          >
+            Consultoría en gestión
+          </h3>
+          <p
+            class="text-sm sm:text-base text-slate-200 font-cursive italic mt-1"
+          >
+            Administrativa y normativa
+          </p>
         </div>
       </a>
-
     </div>
   </section>
 
   <!-- 4. ÚNETE AL CAMBIO EN EXCELENCIA EDUCATIVA (FONDO MOSTAZA / OCRE #b8860b) -->
   <section class="bg-[#b8860b] py-14 sm:py-20 px-4 sm:px-6 lg:px-8 text-white">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-      
+    <div
+      class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+    >
       <!-- Izquierda -->
       <div class="lg:col-span-5 space-y-2 text-center lg:text-left">
-        <p class="text-lg sm:text-xl font-cursive text-amber-100">Únete al cambio</p>
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold font-heading uppercase leading-tight">en excelencia educativa</h2>
+        <p class="text-lg sm:text-xl font-cursive text-amber-100">
+          Únete al cambio
+        </p>
+        <h2
+          class="text-2xl sm:text-4xl md:text-5xl font-bold font-heading uppercase leading-tight"
+        >
+          en excelencia educativa
+        </h2>
       </div>
 
       <!-- Derecha -->
-      <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left">
-        <p class="text-white/95 text-sm sm:text-base md:text-lg leading-relaxed">
-          En CEDEPROEC, transformamos la educación con soluciones estratégicas, adaptadas a las necesidades de cada institución.<br class="hidden sm:inline" />
+      <div
+        class="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left"
+      >
+        <p
+          class="text-white/95 text-sm sm:text-base md:text-lg leading-relaxed"
+        >
+          En CEDEPROEC, transformamos la educación con soluciones estratégicas,
+          adaptadas a las necesidades de cada institución.<br
+            class="hidden sm:inline"
+          />
           Descubre cómo podemos llevar tu institución al siguiente nivel.
         </p>
         <div>
@@ -132,195 +255,363 @@ const heroGradientStyle = calculateHeroGradient(40, 85);
           </a>
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- 5. MISIÓN Y VISIÓN (PARALLAX CON descarga-7.jpeg) -->
-  <section class="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/portafolio/evaluacion.jpeg');">
+  <section
+    class="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden"
+    style="background-image: url('/assets/portafolio/evaluacion.jpeg');"
+  >
     <div class="absolute inset-0 bg-black/55 pointer-events-none"></div>
 
     <div class="relative max-w-5xl xl:max-w-6xl mx-auto z-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-        
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch"
+      >
         <!-- Tarjeta Misión -->
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-4 flex flex-col justify-start border border-slate-100 hover:shadow-3xl transition-all">
-          <p class="text-base sm:text-lg text-[#666666] font-cursive">Tenemos una</p>
-          <h3 class="text-3xl sm:text-4xl font-bold text-[#1a1a1a] font-heading">Misión</h3>
-          <p class="text-[#333333] text-base sm:text-lg md:text-xl leading-relaxed italic">
-            «Ser un aliado estratégico de las Instituciones de Educación generando propuestas de calidad que respondan a las necesidades específicas de cada institución y su entorno, promoviendo la excelencia académica y el desarrollo sostenible.»
+        <div
+          class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-4 flex flex-col justify-start border border-slate-100 hover:shadow-3xl transition-all"
+        >
+          <p class="text-base sm:text-lg text-[#666666] font-cursive">
+            Tenemos una
+          </p>
+          <h3
+            class="text-3xl sm:text-4xl font-bold text-[#1a1a1a] font-heading"
+          >
+            Misión
+          </h3>
+          <p
+            class="text-[#333333] text-base sm:text-lg md:text-xl leading-relaxed italic"
+          >
+            «Ser un aliado estratégico de las Instituciones de Educación
+            generando propuestas de calidad que respondan a las necesidades
+            específicas de cada institución y su entorno, promoviendo la
+            excelencia académica y el desarrollo sostenible.»
           </p>
         </div>
 
         <!-- Tarjeta Visión -->
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-4 flex flex-col justify-start border border-slate-100 hover:shadow-3xl transition-all">
-          <p class="text-base sm:text-lg text-[#666666] font-cursive">Caminamos con</p>
-          <h3 class="text-3xl sm:text-4xl font-bold text-[#1a1a1a] font-heading">Visión</h3>
-          <p class="text-[#333333] text-base sm:text-lg md:text-xl leading-relaxed italic">
-            «Ser reconocidos como un referente del país en la implementación de innovaciones educativas de calidad para el 2030.»
+        <div
+          class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl sm:rounded-3xl shadow-2xl space-y-4 flex flex-col justify-start border border-slate-100 hover:shadow-3xl transition-all"
+        >
+          <p class="text-base sm:text-lg text-[#666666] font-cursive">
+            Caminamos con
+          </p>
+          <h3
+            class="text-3xl sm:text-4xl font-bold text-[#1a1a1a] font-heading"
+          >
+            Visión
+          </h3>
+          <p
+            class="text-[#333333] text-base sm:text-lg md:text-xl leading-relaxed italic"
+          >
+            «Ser reconocidos como un referente del país en la implementación de
+            innovaciones educativas de calidad para el 2030.»
           </p>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- 6. TESTIMONIOS Y ESTADÍSTICAS (PARALLAX CON descarga-6.jpeg) -->
-  <section class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/portafolio/auditoria.jpeg');">
+  <section
+    class="relative py-16 sm:py-24 md:py-28 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden"
+    style="background-image: url('/assets/portafolio/auditoria.jpeg');"
+  >
     <div class="absolute inset-0 bg-[#091E3A]/85 pointer-events-none"></div>
 
-    <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center z-10">
-      
+    <div
+      class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center z-10"
+    >
       <!-- Testimonio (Izquierda) -->
-      <div class="lg:col-span-6 space-y-5 sm:space-y-6 text-center sm:text-left">
+      <div
+        class="lg:col-span-6 space-y-5 sm:space-y-6 text-center sm:text-left"
+      >
         <div>
-          <p class="text-base sm:text-lg text-[#D48D15] font-cursive">De nuestros clientes...</p>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">Testimonios</h2>
+          <p class="text-base sm:text-lg text-[#D48D15] font-cursive">
+            De nuestros clientes...
+          </p>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">
+            Testimonios
+          </h2>
         </div>
-        
+
         <p class="text-slate-200 text-base sm:text-lg leading-relaxed italic">
-          "Trabajar de la mano de profesionales como CEDEPRO ha multiplicado los resultados esperados en nuestra institución y ha acortado el camino hacia nuestros objetivos más ambiciosos."
+          "Trabajar de la mano de profesionales como CEDEPRO ha multiplicado los
+          resultados esperados en nuestra institución y ha acortado el camino
+          hacia nuestros objetivos más ambiciosos."
         </p>
 
-        <div class="flex items-center justify-center sm:justify-start gap-4 pt-2">
-          <img 
-            src="/assets/generales/imagen_temp_1.png" 
-            alt="Ramón Pineda" 
+        <div
+          class="flex items-center justify-center sm:justify-start gap-4 pt-2"
+        >
+          <img
+            src="/assets/generales/imagen_temp_1.png"
+            alt="Ramón Pineda"
             class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white/30 shrink-0"
             decoding="async"
           />
           <div class="text-left">
-            <div class="font-bold text-white text-base sm:text-lg font-heading">Ramón Pineda</div>
+            <div class="font-bold text-white text-base sm:text-lg font-heading">
+              Ramón Pineda
+            </div>
             <div class="text-xs sm:text-sm text-slate-300">Rector CGE</div>
           </div>
         </div>
       </div>
 
       <!-- Estadísticas (Derecha) -->
-      <div class="lg:col-span-6 grid grid-cols-2 gap-6 sm:gap-8 text-center sm:text-left bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-sm">
-        
+      <div
+        class="lg:col-span-6 grid grid-cols-2 gap-6 sm:gap-8 text-center sm:text-left bg-white/5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-sm"
+      >
         <!-- Stat 1 -->
         <div class="space-y-1">
-          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading">+70</p>
-          <p class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium">Carreras aprobadas</p>
+          <p
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading"
+          >
+            +70
+          </p>
+          <p
+            class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium"
+          >
+            Carreras aprobadas
+          </p>
         </div>
 
         <!-- Stat 2 -->
         <div class="space-y-1">
-          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading">+10</p>
-          <p class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium">Inst. Tecnológicos creados</p>
+          <p
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading"
+          >
+            +10
+          </p>
+          <p
+            class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium"
+          >
+            Inst. Tecnológicos creados
+          </p>
         </div>
 
         <!-- Stat 3 -->
         <div class="space-y-1">
-          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading">+2500</p>
-          <p class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium">Profesionales capacitados</p>
+          <p
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading"
+          >
+            +2500
+          </p>
+          <p
+            class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium"
+          >
+            Profesionales capacitados
+          </p>
         </div>
 
         <!-- Stat 4 -->
         <div class="space-y-1">
-          <p class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading">+30</p>
-          <p class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium">Instituciones asesoradas</p>
+          <p
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D48D15] font-heading"
+          >
+            +30
+          </p>
+          <p
+            class="text-xs sm:text-sm tracking-wider uppercase text-slate-200 font-medium"
+          >
+            Instituciones asesoradas
+          </p>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- 7. ALIADOS (PARALLAX CON need-technology-partner.jpg CON TARJETAS BLANCAS) -->
-  <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/generales/technology_partner.jpg');">
+  <section
+    class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-white bg-fixed bg-cover bg-center overflow-hidden"
+    style="background-image: url('/assets/generales/technology_partner.jpg');"
+  >
     <div class="absolute inset-0 bg-[#1e2229]/90 pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto space-y-12 sm:space-y-16 z-10">
-      
       <!-- Heading -->
       <div class="space-y-2 text-center sm:text-left">
-        <p class="text-base sm:text-lg text-[#D48D15] font-cursive">Caminamos con</p>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">Aliados</h2>
-        <p class="text-sm sm:text-base text-slate-200 max-w-2xl">de la mano de grandes partners académicos y administrativos para asegurar la excelencia.</p>
+        <p class="text-base sm:text-lg text-[#D48D15] font-cursive">
+          Caminamos con
+        </p>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-heading">
+          Aliados
+        </h2>
+        <p class="text-sm sm:text-base text-slate-200 max-w-2xl">
+          de la mano de grandes partners académicos y administrativos para
+          asegurar la excelencia.
+        </p>
       </div>
 
       <!-- 4 Featured Partner & Quality Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        
-        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
-          <img src="/assets/partners/partner_2.png" alt="Cavilar el siguiente paso" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" decoding="async" />
-          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">Consultores y asesores corporativos</p>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+      >
+        <div
+          class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100"
+        >
+          <img
+            src="/assets/partners/partner_2.png"
+            alt="Cavilar el siguiente paso"
+            class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto"
+            decoding="async"
+          />
+          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">
+            Consultores y asesores corporativos
+          </p>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
-          <img src="/assets/partners/partner_4.png" alt="Digital Mind Powered by Digital Rocket" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" decoding="async" />
-          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">Investigación y análisis de datos IA</p>
+        <div
+          class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100"
+        >
+          <img
+            src="/assets/partners/partner_4.png"
+            alt="Digital Mind Powered by Digital Rocket"
+            class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto"
+            decoding="async"
+          />
+          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">
+            Investigación y análisis de datos IA
+          </p>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100">
-          <img src="/assets/partners/partner_7.png" alt="Pro & Ciencialink Group-EC" class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto" decoding="async" />
-          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">Consultores en educación y tecnología</p>
+        <div
+          class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-transform hover:-translate-y-1 border border-slate-100"
+        >
+          <img
+            src="/assets/partners/partner_7.png"
+            alt="Pro & Ciencialink Group-EC"
+            class="max-h-20 sm:max-h-24 max-w-full object-contain my-auto"
+            decoding="async"
+          />
+          <p class="text-sm sm:text-base text-[#555555] mt-4 font-medium">
+            Consultores en educación y tecnología
+          </p>
         </div>
 
-        <a href="/politicas-objetivos" class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-all hover:-translate-y-1 border border-slate-100 group block">
-          <img src="/assets/certificaciones/logo_cedepro_iso.webp" alt="Gestión de la Calidad ISO 9001:2015" class="max-h-16 sm:max-h-20 max-w-full object-contain my-auto group-hover:scale-105 transition-transform" decoding="async" />
-          <p class="text-sm sm:text-base text-[#091E3A] mt-4 font-semibold group-hover:text-[#D48D15] transition-colors flex items-center justify-center gap-1.5">
+        <a
+          href="/politicas-objetivos"
+          class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] sm:min-h-[220px] transition-all hover:-translate-y-1 border border-slate-100 group block"
+        >
+          <img
+            src="/assets/certificaciones/logo_cedepro_iso.webp"
+            alt="Gestión de la Calidad ISO 9001:2015"
+            class="max-h-16 sm:max-h-20 max-w-full object-contain my-auto group-hover:scale-105 transition-transform"
+            decoding="async"
+          />
+          <p
+            class="text-sm sm:text-base text-[#091E3A] mt-4 font-semibold group-hover:text-[#D48D15] transition-colors flex items-center justify-center gap-1.5"
+          >
             Gestión de la Calidad
-            <span class="text-sm transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span
+              class="text-sm transform group-hover:translate-x-1 transition-transform"
+              >&rarr;</span
+            >
           </p>
         </a>
-
       </div>
 
       <!-- Sección: Solicita una asesoría y da el siguiente paso -->
-      <div class="pt-6 sm:pt-12 text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
-        <p class="text-base sm:text-lg text-[#D48D15] font-cursive">Solicita una asesoría</p>
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-white font-heading">y da el siguiente paso</h2>
+      <div
+        class="pt-6 sm:pt-12 text-center max-w-3xl mx-auto space-y-4 sm:space-y-6"
+      >
+        <p class="text-base sm:text-lg text-[#D48D15] font-cursive">
+          Solicita una asesoría
+        </p>
+        <h2
+          class="text-2xl sm:text-4xl md:text-5xl font-bold text-white font-heading"
+        >
+          y da el siguiente paso
+        </h2>
         <div class="pt-2">
-          <a href="http://wa.me/593982867413" target="_blank" rel="noopener noreferrer" class="btn-outline-white w-full sm:w-auto">
+          <a
+            href="http://wa.me/593982867413"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline-white w-full sm:w-auto"
+          >
             Escríbenos
           </a>
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- 8. GENERAMOS CONFIANZA (PARALLAX CON Education.jpg Y TARJETAS BLANCAS DE LOGOS) -->
-  <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('/assets/portafolio/educacion.jpg');">
+  <section
+    class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-fixed bg-cover bg-center overflow-hidden"
+    style="background-image: url('/assets/portafolio/educacion.jpg');"
+  >
     <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto space-y-8 sm:space-y-12 z-10">
-      
       <div class="space-y-2 text-center sm:text-left">
-        <p class="text-sm sm:text-base text-[#777777] font-cursive">Generamos</p>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading">Confianza</h2>
-        <p class="text-sm sm:text-base text-[#4a4a4a]">en Universidades e Institutos con los cuales hemos logrado resultados extraordinarios.</p>
+        <p class="text-sm sm:text-base text-[#777777] font-cursive">
+          Generamos
+        </p>
+        <h2
+          class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1a1a1a] font-heading"
+        >
+          Confianza
+        </h2>
+        <p class="text-sm sm:text-base text-[#4a4a4a]">
+          en Universidades e Institutos con los cuales hemos logrado resultados
+          extraordinarios.
+        </p>
       </div>
 
       <!-- Grilla de Logos en Tarjetas Blancas con Sombra -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 items-center">
-        {partnerLogosRow1.map((logo) => (
-          <div class="h-20 sm:h-24 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-3 sm:p-4 hover:shadow-md transition-all hover:scale-[1.02]">
-            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-12 sm:max-h-14 max-w-full object-contain" decoding="async" />
-          </div>
-        ))}
+        {
+          partnerLogosRow1.map((logo) => (
+            <div class="h-20 sm:h-24 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-3 sm:p-4 hover:shadow-md transition-all hover:scale-[1.02]">
+              <img
+                src={`/assets/${logo}`}
+                alt="Aliado Cedepro"
+                class="max-h-12 sm:max-h-14 max-w-full object-contain"
+                decoding="async"
+              />
+            </div>
+          ))
+        }
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center">
-        {partnerLogosRow2.map((logo) => (
-          <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
-            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-10 sm:max-h-12 max-w-full object-contain" decoding="async" />
-          </div>
-        ))}
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center"
+      >
+        {
+          partnerLogosRow2.map((logo) => (
+            <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
+              <img
+                src={`/assets/${logo}`}
+                alt="Aliado Cedepro"
+                class="max-h-10 sm:max-h-12 max-w-full object-contain"
+                decoding="async"
+              />
+            </div>
+          ))
+        }
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center">
-        {partnerLogosRow3.map((logo) => (
-          <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
-            <img src={`/assets/${logo}`} alt="Aliado Cedepro" class="max-h-10 sm:max-h-12 max-w-full object-contain" decoding="async" />
-          </div>
-        ))}
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 sm:gap-3 items-center"
+      >
+        {
+          partnerLogosRow3.map((logo) => (
+            <div class="h-16 sm:h-20 bg-white rounded-2xl shadow-sm border border-slate-200/80 flex items-center justify-center p-2.5 sm:p-3 hover:shadow-md transition-all hover:scale-[1.02]">
+              <img
+                src={`/assets/${logo}`}
+                alt="Aliado Cedepro"
+                class="max-h-10 sm:max-h-12 max-w-full object-contain"
+                decoding="async"
+              />
+            </div>
+          ))
+        }
       </div>
-
     </div>
   </section>
-
 </Layout>
