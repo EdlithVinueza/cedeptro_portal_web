@@ -2,28 +2,34 @@
 const currentPath = Astro.url.pathname;
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Sobre nosotros', href: '/sobre-nosotros' },
-  { name: 'Portafolio', href: '/portafolio' },
-  { name: 'Gestión de la Calidad', href: '/politicas-objetivos' },
-  { name: 'Contáctanos', href: '/contacto' }
+  { name: "Home", href: "/" },
+  { name: "Sobre nosotros", href: "/sobre-nosotros" },
+  { name: "Portafolio", href: "/portafolio" },
+  { name: "Gestión de la Calidad", href: "/politicas-objetivos" },
+  { name: "Contáctanos", href: "/contacto" },
+  { name: "Buzón de Sugerencias", href: "/sugerencias" },
 ];
 
 const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/' || currentPath === '';
+  if (href === "/") return currentPath === "/" || currentPath === "";
   return currentPath.startsWith(href);
 };
 ---
 
-<header class="fixed top-0 left-0 right-0 w-full z-50 bg-[#091E3A]/95 backdrop-blur-md border-b border-[#0d2d59] shadow-md transition-all duration-300">
+<header
+  class="fixed top-0 left-0 right-0 w-full z-50 bg-[#091E3A]/95 backdrop-blur-md border-b border-[#0d2d59] shadow-md transition-all duration-300"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
-      
       <!-- Logotipo Oficial Cedepro + IAS -->
-      <a href="/" class="flex items-center gap-2 sm:gap-3 shrink-0 py-1 transition-transform active:scale-95" aria-label="Cedepro Ecuador - Inicio">
-        <img 
-          src="/assets/certificaciones/logo_cedepro_iso_blanco.webp" 
-          alt="Cedepro Ecuador" 
+      <a
+        href="/"
+        class="flex items-center gap-2 sm:gap-3 shrink-0 py-1 transition-transform active:scale-95"
+        aria-label="Cedepro Ecuador - Inicio"
+      >
+        <img
+          src="/assets/certificaciones/logo_cedepro_iso_blanco.webp"
+          alt="Cedepro Ecuador"
           class="h-8 sm:h-10 md:h-11 w-auto max-w-[160px] sm:max-w-[200px] object-contain"
           width="180"
           height="48"
@@ -32,17 +38,23 @@ const isActive = (href: string) => {
       </a>
 
       <!-- Desktop Navigation Menu -->
-      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class={`relative py-2 transition-colors duration-200 hover:text-[#D48D15] ${
-              isActive(item.href) ? 'text-[#D48D15] font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#D48D15]' : 'text-slate-100'
-            }`}
-          >
-            {item.name}
-          </a>
-        ))}
+      <nav
+        class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium"
+      >
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class={`relative py-2 transition-colors duration-200 hover:text-[#D48D15] ${
+                isActive(item.href)
+                  ? "text-[#D48D15] font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-[#D48D15]"
+                  : "text-slate-100"
+              }`}
+            >
+              {item.name}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- Desktop CTA Button: Cotizador Inteligente (Gold Pill) -->
@@ -75,32 +87,58 @@ const isActive = (href: string) => {
           aria-expanded="false"
           class="p-2.5 rounded-xl text-white hover:bg-white/10 active:bg-white/20 focus:outline-none focus:ring-2 focus:ring-[#D48D15]"
         >
-          <svg id="menu-icon" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <svg
+            id="menu-icon"
+            class="w-6 h-6 block"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            id="close-icon"
+            class="w-6 h-6 hidden"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
-
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden py-4 border-t border-white/10 space-y-2 animate-fadeIn">
+    <div
+      id="mobile-menu"
+      class="hidden lg:hidden py-4 border-t border-white/10 space-y-2 animate-fadeIn"
+    >
       <nav class="flex flex-col space-y-1">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-              isActive(item.href) ? 'text-[#D48D15] font-semibold bg-white/10 border-l-4 border-[#D48D15]' : 'text-white hover:bg-white/5 hover:text-[#D48D15]'
-            }`}
-          >
-            {item.name}
-          </a>
-        ))}
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                isActive(item.href)
+                  ? "text-[#D48D15] font-semibold bg-white/10 border-l-4 border-[#D48D15]"
+                  : "text-white hover:bg-white/5 hover:text-[#D48D15]"
+              }`}
+            >
+              {item.name}
+            </a>
+          ))
+        }
       </nav>
-      
+
       <div class="pt-3 px-1">
         <a
           href="https://calculadora-cedepro.vercel.app/"
@@ -108,34 +146,43 @@ const isActive = (href: string) => {
           rel="noopener noreferrer"
           class="btn-gold w-full !py-3 !text-sm !font-bold"
         >
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+            ></path>
           </svg>
           Cotizador Inteligente
         </a>
       </div>
     </div>
-
   </div>
 </header>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
 
-  btn?.addEventListener('click', () => {
-    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!isExpanded));
-    
-    const isHidden = menu?.classList.toggle('hidden');
+  btn?.addEventListener("click", () => {
+    const isExpanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!isExpanded));
+
+    const isHidden = menu?.classList.toggle("hidden");
     if (isHidden === false) {
-      menuIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
+      menuIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
     } else {
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
     }
   });
 </script>

@@ -48,17 +48,22 @@ import ContactForm from '../components/ContactForm.astro';
     <!-- Right Column: Map, Info and Form -->
     <div class="lg:col-span-7 p-5 sm:p-8 md:p-12 lg:p-16 space-y-8 sm:space-y-10">
       
-      <!-- Google Maps Embed -->
-      <div class="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md h-56 sm:h-72 w-full">
+      <!-- Google Maps Embed Optimizado -->
+      <div class="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md h-56 sm:h-72 w-full bg-slate-50 relative">
+        <div id="map-loader" class="absolute inset-0 flex items-center justify-center">
+          <span class="text-sm text-slate-400 font-medium animate-pulse">Cargando mapa...</span>
+        </div>
         <iframe 
-          src="https://maps.google.com/maps?q=cedepro%20ecuador&t=m&z=17&output=embed&iwloc=near" 
+          id="google-map"
+          data-src="https://maps.google.com/maps?q=cedepro%20ecuador&t=m&z=17&output=embed&iwloc=near" 
           width="100%" 
           height="100%" 
           style="border:0;" 
           allowfullscreen="" 
-          loading="lazy" 
           referrerpolicy="no-referrer-when-downgrade"
           title="Ubicación Cedepro Ecuador"
+          class="relative z-10 transition-opacity duration-500 opacity-0"
+          onload="this.classList.remove('opacity-0'); document.getElementById('map-loader')?.remove();"
         ></iframe>
       </div>
 
@@ -90,3 +95,29 @@ import ContactForm from '../components/ContactForm.astro';
   </section>
 
 </Layout>
+
+<script>
+  // Optimización: Carga diferida del iframe de Google Maps usando IntersectionObserver
+  // Esto elimina el bloqueo del hilo principal durante la carga inicial de la página
+  const map = document.getElementById('google-map') as HTMLIFrameElement;
+  
+  if (map && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const iframe = entry.target as HTMLIFrameElement;
+          if (iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.removeAttribute('data-src');
+          }
+          observer.unobserve(iframe);
+        }
+      });
+    }, { rootMargin: '300px' });
+    
+    observer.observe(map);
+  } else if (map && map.dataset.src) {
+    // Fallback para navegadores antiguos
+    map.src = map.dataset.src;
+  }
+</script>
